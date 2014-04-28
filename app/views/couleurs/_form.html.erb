@@ -1,34 +1,54 @@
-<%= form_for @couleur, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :title, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :title, :class => 'text_field' %>
+<%= form_for @couleur, :html => {:class => 'form-horizontal'} do |f| %>
+    <div class="control-group">
+      <%= f.label :title, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :title, :class => 'text_field' %>
+      </div>
     </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :coul_type, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :coul_type, :class => 'text_field' %>
+    <div class="control-group">
+      <%= f.label :coul_type, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :coul_type, :class => 'text_field' %>
+      </div>
     </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :value_coul, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :value_coul, :class => 'text_field' %>
-      <script type="text/javascript">
-        function callColorPicker(value)
-        {
-            $('.colorpicker').colorpicker('showbun')
-        }
-      </script>
-      <div id="Inline"></div>
-      <a onclick="callColorPicker('show')">Color</a>
-    </div>
-  </div>
+    <div class="control-group">
+      <%= f.label :value_coul, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :value_coul, :class => 'text_field' %>
+        <script type="text/javascript">
+            function callColorPicker() {
+                $('INPUT.minicolors').minicolors(settings);
+            }
+        </script>
+        <div id="Inline"></div>
+        <div class="minicolors minicolors-theme-default minicolors-position-bottom minicolors-position-left">
+          <input type="text" id="hue-demo" class="demo minicolors-input" data-control="hue" value="#ff6161" size="7">
 
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                couleurs_path, :class => 'btn' %>
-  </div>
+         <span class="minicolors-swatch">
+           <span class="minicolors-swatch-color" style="background-color: rgb(255, 97, 97);"></span>
+         </span>
+
+          <div class="minicolors-panel minicolors-slider-hue" style="display: none;">
+            <div class="minicolors-slider">
+              <div class="minicolors-picker" style="top: 150px;"></div>
+            </div>
+            <div class="minicolors-opacity-slider">
+              <div class="minicolors-picker"></div>
+            </div>
+            <div class="minicolors-grid" style="background-color: rgb(255, 0, 0);">
+              <div class="minicolors-grid-inner"></div>
+              <div class="minicolors-picker" style="top: 0px; left: 93px;">
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  couleurs_path, :class => 'btn' %>
+    </div>
 <% end %>
