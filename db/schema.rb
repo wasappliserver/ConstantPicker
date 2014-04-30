@@ -11,12 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428191023) do
+ActiveRecord::Schema.define(version: 20140430204236) do
 
   create_table "couleurs", force: true do |t|
     t.string   "title"
     t.string   "coul_type"
     t.string   "value_coul"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "menus", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end

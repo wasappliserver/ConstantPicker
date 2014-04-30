@@ -15,3 +15,31 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+/*$(document).ready(function () {
+ $('#minicolor').each(function () {
+ alert('sfdgs');
+ $(this).minicolors();
+ });
+ });
+
+ function click_minicolor() {
+ $(document).ready(function () {
+ $('#minicolor').each(function () {
+ $(this).minicolors();
+ });
+ });
+ return false;
+ }
+ */
+
+var minicolor;
+minicolor = function () {
+
+    $('#minicolor').each(function () {
+        $(this).minicolors({defaultValue: $(this).attr('data_defaultValue')});
+    });
+};
+
+$(document).ready(minicolor);
+$(document).on('page:load', minicolor);

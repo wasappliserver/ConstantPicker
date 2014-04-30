@@ -4,6 +4,7 @@ class CouleursController < ApplicationController
   # GET /couleurs
   # GET /couleurs.json
   def index
+    CouleursHelper.readHeader
     @couleurs = Couleur.all
   end
 
@@ -62,13 +63,19 @@ class CouleursController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_couleur
-      @couleur = Couleur.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_couleur
+    @couleur = Couleur.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def couleur_params
-      params.require(:couleur).permit(:title, :coul_type, :value_coul)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def couleur_params
+    params.require(:couleur).permit(:title, :coul_type, :value_coul)
+  end
 end
+
+
+
+
+
+

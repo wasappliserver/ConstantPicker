@@ -6,5 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Couleur.delete_all
-Couleur.create!(title: "COLOR_COMMENT_TEXT", coul_type: "UI_COLOR", value_coul:"0x4b4b4b")
-Couleur.create!(title: "COLOR_CONTENT_TEXT", coul_type: "UI_COLOR", value_coul:"0x4b4baa")
+
