@@ -3,4 +3,9 @@
   <data-source source="LOCAL" name="Rails FacePickers: development" uuid="b3b141fb-5409-4d9d-b103-a93d6db562bc">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
+  <data-source source="LOCAL" name="Rails FacePickers: test" uuid="a6334d07-3f1f-4b2b-8c64-f2bed1517923">
+    <database-info product="SQLite" version="3.7.6.3" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
+    <schema name="" catalog=""/>
+  </data-source>
 </component>
