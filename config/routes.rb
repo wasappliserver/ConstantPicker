@@ -1,13 +1,30 @@
 Rails.application.routes.draw do
-  resources :menus
+
+  get 'admin' => 'static#home'
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+
+  get 'admin/index'
+
+  get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+
+  resources :users
 
   resources :couleurs
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  #root 'menu#index', as: 'menu'
+  root 'static#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

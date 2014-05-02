@@ -38,34 +38,36 @@ module CouleursHelper
       #array of array, access the content from the second table index
 
       #name
-      puts tab[0][0]
+      #puts tab[0][0]
       #type
-      puts tab[0][1]
+      #puts tab[0][1]
       #value
-      puts tab[0][2]
+      #puts tab[0][2]
 
       #verification duplicate
-      tp Couleur.all
+      # tp Couleur.all
       query = Couleur.where(:title => tab[0][0])
       if query.count != 0
-        puts 'this entry is already in the database'
+        #puts 'this entry is already in the database'
         return false
       else
         Couleur.create!(title: tab[0][0], coul_type: tab[0][1], value_coul: tab[0][3])
       end
     else
-      puts 'not ok'
+      #puts 'not ok'
       return false
 
     end
   end
+
   module_function :isColor
 
   def value_coul_to_minicolor value_coul
-      new_value = value_coul.gsub("0x","#")
-      Rails.logger.info new_value
+    new_value = value_coul.gsub("0x", "#")
+    #Rails.logger.info new_value
     return new_value
   end
+
   module_function :value_coul_to_minicolor
 
 end
