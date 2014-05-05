@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div class="center hero-unit">
+
+  <h2 class="text-center">You are
+    <% user = User.find_by(session[:user_id]) %>
+    <%= user.name %></h2>
+</div>
+<div class="panel panel-default">
+
+  <div class="well text-center">
+    <h4>Click <%= link_to "here", couleurs_path %> to change the colors</h4>
+  </div>
+
+  <% if (session[:user_id]!= nil) %>
+      <%= button_to 'Logout', logout_path, method: :delete %>
+  <% end %>
+</div>
+</body>
+</html>
