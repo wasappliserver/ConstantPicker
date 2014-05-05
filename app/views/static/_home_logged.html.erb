@@ -13,6 +13,12 @@
     <h4>Click <%= link_to "here", couleurs_path %> to change the colors</h4>
   </div>
 
+  <% if (UsersHelper.isAdmin(session[:user_id])==true) %>
+      <div class="well text-center">
+        <%= render :partial => "static/home_admin" %>
+      </div>
+  <% end %>
+
   <% if (session[:user_id]!= nil) %>
       <%= button_to 'Logout', logout_path, method: :delete %>
   <% end %>

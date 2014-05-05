@@ -16,22 +16,7 @@
 //= require turbolinks
 //= require_tree .
 
-/*$(document).ready(function () {
- $('#minicolor').each(function () {
- alert('sfdgs');
- $(this).minicolors();
- });
- });
-
- function click_minicolor() {
- $(document).ready(function () {
- $('#minicolor').each(function () {
- $(this).minicolors();
- });
- });
- return false;
- }
- */
+var display = false;
 
 var minicolor;
 minicolor = function () {
@@ -43,3 +28,14 @@ minicolor = function () {
 
 $(document).ready(minicolor);
 $(document).on('page:load', minicolor);
+
+/*
+function show_sign_form() {
+    if (display == false) {
+        document.getelementbyid("sign_in_form").display='block';
+        display == true;
+    } else if (display == true) {
+        document.getelementbyid("sign_in_form").display='none';
+        display == false;
+    }
+}*/
