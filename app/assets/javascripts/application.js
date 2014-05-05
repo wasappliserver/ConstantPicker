@@ -16,6 +16,8 @@
 //= require turbolinks
 //= require_tree .
 
+
+
 var display = false;
 
 var minicolor;

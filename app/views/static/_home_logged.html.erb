@@ -4,8 +4,9 @@
 <div class="center hero-unit">
 
   <h2 class="text-center">You are
-    <% user = User.find_by(session[:user_id]) %>
-    <%= user.name %></h2>
+    <% @user = User.find_by(session[:user_id]) %>
+    <%= @user.admin %>
+    <%= @user.name %></h2>
 </div>
 <div class="panel panel-default">
 
@@ -20,7 +21,7 @@
   <% end %>
 
   <% if (session[:user_id]!= nil) %>
-      <%= button_to 'Logout', logout_path, method: :delete %>
+      <%= button_to 'Logout', logout_path, method: :delete, :class => "btn btn-info" %>
   <% end %>
 </div>
 </body>

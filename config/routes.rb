@@ -3,12 +3,11 @@ Rails.application.routes.draw do
   get 'admin' => 'static#home'
 
   controller :sessions do
-    get 'login' => :new
     post 'login' => :create
     delete 'logout' => :destroy
+    get 'logout' => 'static#home'
   end
 
-  get 'admin/index'
 
   get 'sessions/new'
 

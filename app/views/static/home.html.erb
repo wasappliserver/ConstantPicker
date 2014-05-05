@@ -8,39 +8,31 @@
   <% end %>
 
 </div>
+
 <div class="panel panel-default">
 
   <% if (session[:user_id]== nil) %>
-      <div class="well text-center">
-        <%= render :partial => "sessions/new" %>
-      </div>
-      <div class="well text-center">
-        <div id="sign_in_form">
-          <!-- Button trigger modal -->
-          <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-            Sign In
-          </button>
 
-          <!-- Modal -->
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title" id="myModalLabel">
-                    New user
-                  </h4>
-                </div>
-                <div class="modal-body">
-                  <%= render :partial => "users/new_usr" %>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+      <div class="well text-center">
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                  Create an account here
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+              <div class="panel-body">
+                <%= render :partial => "users/new_usr" %>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="well text-center">
+        <%= render :partial => "sessions/new" %>
       </div>
   <% end %>
 
