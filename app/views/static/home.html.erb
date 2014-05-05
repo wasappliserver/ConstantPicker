@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <div class="center hero-unit">
-            <h1>Welcome to Wasappli Value Changer</h1>
-        </div>
-        <div class="panel panel-default">
-            <div class="well">
-                <h4>Click <%= link_to "here", couleurs_path %> to change the colors</h4>
-            </div>
-        </div>
-    </body>
+<body>
+<div class="center hero-unit">
+  <h1>Welcome to Wasappli Value Changer</h1>
+  <% if (session[:user_id]!= nil) %>
+      <%= render :partial => "static/home_logged" %>
+  <% end %>
+
+</div>
+<div class="panel panel-default">
+
+  <% if (session[:user_id]== nil) %>
+      <div class="well text-center">
+        <%= render :partial => "sessions/new" %>
+      </div>
+  <% end %>
+
+</div>
+</body>
 </html>
