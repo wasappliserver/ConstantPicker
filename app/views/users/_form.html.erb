@@ -47,21 +47,6 @@
             <%= f.text_field :admin, :class => 'text_field' %>
           </div>
         </div>
-        <%= form_for(@user, :html => {:multipart => true}) do
-        |f| %>
-            <div class="control-group">
-              <%= f.label :app_ids %>
-              <br>
-
-              <div class="controls">
-                <%= f.text_field :app_ids, :class => 'text_field' %>
-              </div>
-              <%= f.collection_select(:app_ids, App.all, :id, :name) %>
-            </div>
-            <%= f.submit nil, :class => 'btn btn-primary' %>
-
-        <% end %>
-
         <div class="form-actions">
           <%= f.submit nil, :class => 'btn btn-primary' %>
           <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
