@@ -9,11 +9,15 @@ Couleur.delete_all
 User.delete_all
 App.delete_all
 
-User.create!(name: 'admin', password:'admin', admin: 'true')
+User.create!(name: 'admin', password: 'admin', admin: 'true')
+User.create!(name: 'client1', password: 'client1', admin: 'false')
+User.create!(name: 'client2', password: 'client2', admin: 'false')
 
 App.create!(name: 'iAddic7')
 App.create!(name: 'PPWordPressModel')
 App.create!(name: 'DriveCity2')
 App.create!(name: 'Humanoid')
 App.create!(name: 'Bunny Maniacs')
+
+
 

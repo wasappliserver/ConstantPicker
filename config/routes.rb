@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
     get 'logout' => 'static#home'
+    get 'login' => 'static#home'
   end
 
 

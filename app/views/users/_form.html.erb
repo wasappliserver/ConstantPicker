@@ -14,28 +14,58 @@
       <% end %>
       <fieldset>
         <legend>Enter User Details</legend>
-        <div class="field">
+        <div class="control-group">
           <%= f.label :name, size: 40 %>
           <br>
-          <%= f.text_field :name %>
+
+          <div class="controls">
+            <%= f.text_field :name, :class => 'text_field' %>
+          </div>
         </div>
-        <div class="field">
+        <div class="control-group">
           <%= f.label :password %>
           <br>
-          <%= f.password_field :password, size: 40 %>
+
+          <div class="controls">
+            <%= f.password_field :password, size: 40, :class => 'text_field' %>
+          </div>
         </div>
-        <div>
+        <div class="control-group">
           <%= f.label :password_confirmation %>
           <br>
-          <%= f.password_field :password_confirmation, size: 40 %>
+
+          <div class="controls">
+            <%= f.password_field :password_confirmation, size: 40, :class => 'text_field' %>
+          </div>
         </div>
-        <div>
+
+        <div class="control-group">
           <%= f.label :admin %>
           <br>
-          <%= f.text_field :admin %>
+
+          <div class="controls">
+            <%= f.text_field :admin, :class => 'text_field' %>
+          </div>
         </div>
-        <div class="actions">
-          <%= f.submit %>
+        <%= form_for(@user, :html => {:multipart => true}) do
+        |f| %>
+            <div class="control-group">
+              <%= f.label :app_ids %>
+              <br>
+
+              <div class="controls">
+                <%= f.text_field :app_ids, :class => 'text_field' %>
+              </div>
+              <%= f.collection_select(:app_ids, App.all, :id, :name) %>
+            </div>
+            <%= f.submit nil, :class => 'btn btn-primary' %>
+
+        <% end %>
+
+        <div class="form-actions">
+          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                      users_path, :class => 'btn' %>
         </div>
       </fieldset>
   <% end %>
