@@ -23,7 +23,13 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def edit2
+    @user = User.find(params[:id])
+  end
 
+  def app_ids
+    puts "sdfdasfdadf \n \n \n \n "
+  end
 
   # POST /users
   # POST /users.json

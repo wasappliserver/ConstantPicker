@@ -9,14 +9,17 @@ Rails.application.routes.draw do
     get 'login' => 'static#home'
   end
 
-
   get 'sessions/new'
 
   get 'sessions/create'
 
   get 'sessions/destroy'
 
-  resources :users
+  resources :users do
+    member do
+      get 'edit2' => :edit2
+    end
+  end
 
   resources :couleurs
 

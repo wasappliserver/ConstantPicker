@@ -8,7 +8,7 @@
     <th><%= model_class.human_attribute_name(:id) %></th>
     <th><%= model_class.human_attribute_name(:name) %></th>
     <th><%= model_class.human_attribute_name(:admin) %></th>
-    <th><%= model_class.human_attribute_name(:app_ids) %></th>
+    <th><%= model_class.human_attribute_name('APPLIS') %></th>
     <th><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
@@ -18,8 +18,8 @@
         <td><%= link_to user.id, user_path(user) %></td>
         <td><%= user.name %></td>
         <td><%= user.admin %></td>
-        <td><%= UsersHelper.allApps user %> <%= user.app_ids.to_s %>
-          <%= link_to "edit_ids", edit_ids_user_path(user), :class => 'btn btn-mini' %></td>
+        <td><%= UsersHelper.allApps user %>
+          <%= link_to 'edit 2', edit2_user_path(user), :class => 'btn btn-mini' %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_user_path(user), :class => 'btn btn-mini' %>
