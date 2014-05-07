@@ -1,7 +1,8 @@
 <%- model_class = Couleur -%>
 <div class="page-header">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize, :class => "text-center" %></h1>
 </div>
+
 <table class="table table-striped">
   <thead>
   <tr>
@@ -9,7 +10,6 @@
     <th><%= model_class.human_attribute_name(:title) %></th>
     <th><%= model_class.human_attribute_name(:coul_type) %></th>
     <th><%= model_class.human_attribute_name(:value_coul) %></th>
-    <th><%= model_class.human_attribute_name(:created_at) %></th>
     <th><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
@@ -20,7 +20,6 @@
         <td><%= couleur.title %></td>
         <td><%= couleur.coul_type %></td>
         <td><%= CouleursHelper.value_coul_to_minicolor(couleur.value_coul) %></td>
-        <td><%= l couleur.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_couleur_path(couleur), :class => 'btn btn-mini' %>
@@ -35,7 +34,5 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_couleur_path,
-            :class => 'btn btn-primary' %>
-<%= link_to "Back to menu", root_path , :class => 'btn btn-secondary'%>
+
+<%= link_to "Back to menu", root_path, :class => 'btn btn-secondary' %>

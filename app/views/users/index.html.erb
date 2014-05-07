@@ -19,7 +19,7 @@
         <td><%= user.name %></td>
         <td><%= user.admin %></td>
         <td><%= UsersHelper.allApps user %>
-          <%= link_to 'edit 2', edit2_user_path(user), :class => 'btn btn-mini' %></td>
+          <%= link_to 'Edit Allowed Apps', edit2_user_path(user), :class => 'btn btn-warning btn-mini' %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_user_path(user), :class => 'btn btn-mini' %>

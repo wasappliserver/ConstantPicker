@@ -17,7 +17,6 @@
       <tr>
         <td><%= link_to app.id, app_path(app) %></td>
         <td><%= app.name %></td>
-        <td><%= app.apps_users_id %></td>
         <td><%=l app.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
