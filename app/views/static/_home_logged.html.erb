@@ -11,10 +11,11 @@
 <div class="panel panel-default">
 
   <div class="well text-center">
-    <h2 class="underlined"> <%= link_to "here", couleurs_path %>Select an App:</h2>
+    <h2 class="underlined">Select an App:</h2>
     <% @user.apps.each do |app| %>
         <h3> <%= app.name %></h3>
         <%= link_to 'Modify Colors', couleurs_path(app.id), :class => "btn btn-success" %>
+        <%= link_to 'Modify Numbers', numbers_path(app.id), :class => "btn btn-success" %>
     <% end %>
   </div>
 

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :numbers
+
   get 'admin' => 'static#home'
 
   controller :sessions do

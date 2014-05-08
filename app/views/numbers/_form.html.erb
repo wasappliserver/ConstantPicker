@@ -1,10 +1,10 @@
-<%= form_for @couleur, :html => {:class => 'form-horizontal'} do |f| %>
-    <% if @couleur.errors.any? %>
+<%= form_for @number, :html => {:class => 'form-horizontal'} do |f| %>
+    <% if @number.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@couleur.errors.count, "error") %> prohibited this color from being saved:</h2>
+          <h2><%= pluralize(@number.errors.count, "error") %> prohibited this number from being saved:</h2>
 
           <ul>
-            <% @couleur.errors.full_messages.each do |message| %>
+            <% @number.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
             <% end %>
           </ul>
@@ -17,22 +17,16 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :coul_type, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :coul_type, :class => 'text_field' %>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :value_coul, :class => 'control-label' %>
+      <%= f.label :value, :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :value_coul, :class => 'text_field', :id => 'minicolor', :data_defaultValue => "#{CouleursHelper.value_coul_to_minicolor(@couleur.value_coul)}" %>
-        <div id="Inline"></div>
+        <div id="Inline"></value>
+        </div>
       </div>
     </div>
-
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  couleurs_path, :class => 'btn' %>
+                  numbers_path, :class => 'btn' %>
     </div>
 <% end %>

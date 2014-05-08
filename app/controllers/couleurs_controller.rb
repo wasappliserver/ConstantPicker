@@ -7,7 +7,7 @@ class CouleursController < ApplicationController
     tp Couleur.all
     @user=User.find(session[:user_id])
     @app = @user.apps.find(params[:format])
-    CouleursHelper.readHeader params[:format]
+    ApplicationHelper.readHeader params[:format]
   end
 
 # GET /couleurs/1
