@@ -4,7 +4,4 @@ class StaticController < ApplicationController
   def home
   end
 
-  def AppCoul
-
-  end
 end

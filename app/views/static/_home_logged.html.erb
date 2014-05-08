@@ -1,36 +1,47 @@
 <!DOCTYPE html>
 <html>
 <body>
-<div class="center hero-unit">
+<div class="center">
 
-  <h2 class="text-center">You are
-    <% user = User.find_by(session[:user_id]); %>
-    <%= user.id %>
-    <%= user.admin %>
-    <%= user.name %></h2>
+  <h2 class="text-center">Nice to see you again
+    <% user = User.find(session[:user_id]); %>
+    <%= user.name %> !</h2>
 </div>
-<div class="panel panel-default">
 
-  <div class="well text-center">
-    <h2 class="underlined">Select an App:</h2>
+<div class="well well-sm">
+  <h2 class="page-header">Select an App:</h2>
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th>App Name</th>
+      <th>Colors</th>
+      <th>Numbers</th>
+      <th>Strings</th>
+    </tr>
+    </thead>
+    <tbody>
+
     <% user.apps.each do |app| %>
-        <h3> <%= app.name %></h3>
-        <%= link_to 'Modify Colors', couleurs_path(app.id), :class => "btn btn-success" %>
-        <%= link_to 'Modify Numbers', numbers_path(app.id), :class => "btn btn-success" %>
-        <%= link_to 'Modify Strings', at_strings_path(app.id), :class => "btn btn-success" %>
-
+        <tr>
+          <td><%= app.name %></h3></td>
+          <td><%= link_to 'Modify Colors', couleurs_path(app.id), :class => "btn btn-small btn-success" %></td>
+          <td><%= link_to 'Modify Numbers', numbers_path(app.id), :class => "btn btn-small btn-danger" %></td>
+          <td><%= link_to 'Modify Strings', at_strings_path(app.id), :class => "btn btn-small btn-primary" %></td>
+        </tr>
     <% end %>
-  </div>
-
-  <% if (UsersHelper.isAdmin(session[:user_id])==true) %>
-      <div class="well text-center">
-        <%= render :partial => "static/home_admin" %>
-      </div>
-  <% end %>
-
-  <% if (session[:user_id]!= nil) %>
-      <%= button_to 'Logout', logout_path, method: :delete, :class => "btn btn-info" %>
-  <% end %>
+    </tbody>
+  </table>
 </div>
+
+<% if (UsersHelper.isAdmin(session[:user_id])==true) %>
+    <div class="well well-sm text-center">
+      <%= render :partial => "static/home_admin" %>
+    </div>
+<% end %>
+
+<% if (session[:user_id]!= nil) %>
+    <%= button_to 'Logout', logout_path, method: :delete, :class => "btn btn-info" %>
+<% end %>
+
 </body>
 </html>

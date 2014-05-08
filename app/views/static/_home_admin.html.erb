@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <body>
-<div class="panel panel-default">
 
-  <div class="well text-center">
-    <h4>Click <%= link_to "here", apps_path %> to manage the applications</h4>
-    <h4>Click <%= link_to "here", users_path %> to manage the users</h4>
-  </div>
-  <% tp AppsUsers.all %>
+<div class="well-sm text-center">
+  <h2 class="page-header">Admin Panel:</h2>
+  <h2> <%= link_to "Click here to manage the applications", apps_path, :class => "btn btn-info btn-large" %> </h2>
+
+  <h2> <%= link_to "Click here to manage the users", users_path, :class => "btn btn-warning btn-large" %> </h2>
 </div>
+<% tp AppsUsers.all %>
 </body>
 </html>

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <body>
-<div class="center hero-unit">
+
+<div class="center herounit">
   <h1 class="text-center">Welcome to Wasappli Value Changer</h1>
   <% if (session[:user_id]!= nil) %>
       <%= render :partial => "static/home_logged" %>
   <% end %>
-
 </div>
+
 
 <div class="panel panel-default">
 
@@ -37,5 +38,6 @@
   <% end %>
 
 </div>
+
 </body>
 </html>

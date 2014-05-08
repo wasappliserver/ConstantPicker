@@ -32,10 +32,9 @@ class CouleursController < ApplicationController
 # POST /couleurs.json
   def create
     @couleur = Couleur.new(couleur_params)
-
     respond_to do |format|
       if @couleur.save
-        format.html { redirect_to @couleur, notice: 'Couleur was successfully created.' }
+        format.html { redirect_to couleurs_path, notice: 'Couleur was successfully created.' }
         format.json { render :show, status: :created, location: @couleur }
       else
         format.html { render :new }
@@ -50,7 +49,7 @@ class CouleursController < ApplicationController
     session[:app_id]=params[:couleur][:app_id]
     respond_to do |format|
       if @couleur.update(couleur_params)
-        format.html { redirect_to @couleur, notice: 'Couleur was successfully updated.' }
+        format.html { redirect_to couleurs_path, notice: 'Couleur was successfully updated.' }
         format.json { render :show, status: :ok, location: @couleur }
       else
         format.html { render :edit }

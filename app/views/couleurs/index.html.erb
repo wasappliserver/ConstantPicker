@@ -1,8 +1,7 @@
 <%- model_class = Couleur -%>
-<%  %>
+<% %>
 <div class="page-header">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize, :class => "text-center" %> de
-    l'application <%= @app.name %> </h1>
+  <h1>Colors of <%= @app.name %> </h1>
 </div>
 
 <table class="table table-striped">
@@ -36,5 +35,5 @@
   </tbody>
 </table>
 
-
+<%= link_to "New Color", new_couleur_path, :class => 'btn btn-primary' %>
 <%= link_to "Back to menu", root_path, :class => 'btn btn-secondary' %>
