@@ -5,6 +5,7 @@ class CreateCouleurs < ActiveRecord::Migration
       t.string :title
       t.string :coul_type
       t.string :value_coul
+      t.belongs_to :app
       t.timestamps
     end
   end

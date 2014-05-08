@@ -6,7 +6,7 @@ module CouleursHelper
   def readHeader id
     app_name = App.find(id).name
     text = Array.new
-    path ="/Users/wasappliserver/.jenkins/jobs/#{app_name}/workspace/#{app_name}/Constants.h"
+    path ="/Users/wasappliserver/.jenkins/jobs/#{app_name}/workspace/#{app_name}/Theme.h"
 
     if File.exist?(path)
       File.open(path) do |file|
@@ -25,7 +25,7 @@ module CouleursHelper
 
         #on lance la boucle des #define
         for i in 0..@define_tab.count-1
-          isColor @define_tab[i]
+          isColor @define_tab[i], id
         end
       end
     else
@@ -36,16 +36,15 @@ module CouleursHelper
 
   module_function :readHeader
 
-  def isColor str
+  def isColor str, id
     #isColor?
     puts str
     if str =~ /UIColor/
       @define_color << str
       tab = str.scan(/\S+\s(\S*)\s\[(\S*)\s(.*):([\w]*)\]/m)
       #array of array, access the content from the second table index
-      puts "ALOOOOOOOOOO \n \n \n ALOOOOO"
       #verification duplicate
-      # tp Couleur.all
+      tp Couleur.all
       query = Couleur.where(:title => tab[0][0])
       puts query.to_s + "QUERY \n \n "
       if query.count != 0
@@ -53,7 +52,7 @@ module CouleursHelper
         return false
       else
         puts "CREATION D\'UNE LIGNE DANS COULEUR"
-        Couleur.create!(title: tab[0][0], coul_type: tab[0][1], value_coul: tab[0][3])
+        Couleur.create!(title: tab[0][0], coul_type: tab[0][1], value_coul: tab[0][3], app_id: id)
       end
     else
       #puts 'not ok'

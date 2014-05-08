@@ -1,3 +1,3 @@
 class Couleur < ActiveRecord::Base
-  has_one :apps
+  belongs_to :app
 end

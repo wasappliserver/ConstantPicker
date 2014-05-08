@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506153050) do
+ActiveRecord::Schema.define(version: 20140508134746) do
 
   create_table "apps", force: true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140506153050) do
     t.string   "title"
     t.string   "coul_type"
     t.string   "value_coul"
+    t.integer  "app_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

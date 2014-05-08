@@ -5,14 +5,9 @@ class CouleursController < ApplicationController
   # GET /couleurs.json
   def index
     tp Couleur.all
+    @user=User.find(session[:user_id])
+    @app = @user.apps.find(params[:format])
     CouleursHelper.readHeader params[:format]
-    #list all the color for the specified app
-    puts "params :" +params.to_s
-    @couleurs = Couleur.all #.where("app_id="+params[:format])
-    @couleurs.each do |couleur|
-      puts couleur.app_id + "dsafs"
-
-    end
   end
 
 # GET /couleurs/1

@@ -12,10 +12,9 @@
 
   <div class="well text-center">
     <h2 class="underlined"> <%= link_to "here", couleurs_path %>Select an App:</h2>
-    <% for i in 0..@user.app_ids.length-1
-         @app=App.find(@user.app_ids[i]) %>
-        <h3> <%= @app.name %></h3>
-        <%= link_to 'Modify Colors', couleurs_path(@app), :class => "btn btn-success" %>
+    <% @user.apps.each do |app| %>
+        <h3> <%= app.name %></h3>
+        <%= link_to 'Modify Colors', couleurs_path(app.id), :class => "btn btn-success" %>
     <% end %>
   </div>
 

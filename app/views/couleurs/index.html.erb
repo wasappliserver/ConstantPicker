@@ -1,6 +1,8 @@
 <%- model_class = Couleur -%>
+<%  %>
 <div class="page-header">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize, :class => "text-center" %></h1>
+  <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize, :class => "text-center" %> de
+    l'application <%= @app.name %> </h1>
 </div>
 
 <table class="table table-striped">
@@ -14,7 +16,7 @@
   </tr>
   </thead>
   <tbody>
-  <% @couleurs.each do |couleur| %>
+  <% @app.couleurs.each do |couleur| %>
       <tr>
         <td><%= link_to couleur.id, couleur_path(couleur) %></td>
         <td><%= couleur.title %></td>
