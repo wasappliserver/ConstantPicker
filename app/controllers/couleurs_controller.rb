@@ -4,10 +4,14 @@ class CouleursController < ApplicationController
   # GET /couleurs
   # GET /couleurs.json
   def index
-    tp Couleur.all
     @user=User.find(session[:user_id])
-    @app = @user.apps.find(params[:format])
-    ApplicationHelper.readHeader params[:format]
+    if (params.has_key?(:format))
+      @app = @user.apps.find(params[:format])
+      ApplicationHelper.readHeader params[:format]
+    elsif (session.has_key?(:app_id))
+      @app = @user.apps.find(session[:app_id])
+      ApplicationHelper.readHeader session[:app_id]
+    end
   end
 
 # GET /couleurs/1
@@ -43,6 +47,7 @@ class CouleursController < ApplicationController
 # PATCH/PUT /couleurs/1
 # PATCH/PUT /couleurs/1.json
   def update
+    session[:app_id]=params[:couleur][:app_id]
     respond_to do |format|
       if @couleur.update(couleur_params)
         format.html { redirect_to @couleur, notice: 'Couleur was successfully updated.' }

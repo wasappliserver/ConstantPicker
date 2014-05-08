@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :at_strings
+
   resources :numbers
 
   get 'admin' => 'static#home'

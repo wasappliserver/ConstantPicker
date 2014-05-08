@@ -17,9 +17,6 @@
 //= require_tree .
 
 
-
-var display = false;
-
 var minicolor;
 minicolor = function () {
 
@@ -31,13 +28,4 @@ minicolor = function () {
 $(document).ready(minicolor);
 $(document).on('page:load', minicolor);
 
-/*
-function show_sign_form() {
-    if (display == false) {
-        document.getelementbyid("sign_in_form").display='block';
-        display == true;
-    } else if (display == true) {
-        document.getelementbyid("sign_in_form").display='none';
-        display == false;
-    }
-}*/
+

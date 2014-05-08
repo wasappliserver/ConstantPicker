@@ -29,10 +29,11 @@
         <div id="Inline"></div>
       </div>
     </div>
+    <%= f.hidden_field :app_id, :value => "#{@couleur.app_id}" %>
 
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  couleurs_path, :class => 'btn' %>
+                  couleurs_path(@couleur.app_id), :class => 'btn' %>
     </div>
 <% end %>

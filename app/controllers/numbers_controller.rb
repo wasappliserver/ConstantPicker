@@ -4,31 +4,35 @@ class NumbersController < ApplicationController
   # GET /numbers
   # GET /numbers.json
   def index
-    @numbers = Number.all
     @user=User.find(session[:user_id])
-    @app = @user.apps.find(params[:format])
-    ApplicationHelper.readHeader params[:format]
+    if (params.has_key?(:format))
+      @app = @user.apps.find(params[:format])
+      ApplicationHelper.readHeader params[:format]
+    elsif (session.has_key?(:app_id))
+      @app = @user.apps.find(session[:app_id])
+      ApplicationHelper.readHeader session[:app_id]
+    end
   end
 
-  # GET /numbers/1
-  # GET /numbers/1.json
+
+# GET /numbers/1
+# GET /numbers/1.json
   def show
   end
 
-  # GET /numbers/new
+# GET /numbers/new
   def new
     @number = Number.new
   end
 
-  # GET /numbers/1/edit
+# GET /numbers/1/edit
   def edit
   end
 
-  # POST /numbers
-  # POST /numbers.json
+# POST /numbers
+# POST /numbers.json
   def create
     @number = Number.new(number_params)
-
     respond_to do |format|
       if @number.save
         format.html { redirect_to @number, notice: 'Number was successfully created.' }
@@ -40,9 +44,11 @@ class NumbersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /numbers/1
-  # PATCH/PUT /numbers/1.json
+# PATCH/PUT /numbers/1
+# PATCH/PUT /numbers/1.json
   def update
+    puts params.to_s
+    session[:app_id]=params[:number][:app_id]
     respond_to do |format|
       if @number.update(number_params)
         format.html { redirect_to numbers_path, notice: 'Number was successfully updated.' }
@@ -54,8 +60,8 @@ class NumbersController < ApplicationController
     end
   end
 
-  # DELETE /numbers/1
-  # DELETE /numbers/1.json
+# DELETE /numbers/1
+# DELETE /numbers/1.json
   def destroy
     @number.destroy
     respond_to do |format|
@@ -65,13 +71,14 @@ class NumbersController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+# Use callbacks to share common setup or constraints between actions.
   def set_number
     @number = Number.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+# Never trust parameters from the scary internet, only allow the white list through.
   def number_params
     params.require(:number).permit(:title, :value, :app_id)
   end
+
 end

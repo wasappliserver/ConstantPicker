@@ -1,10 +1,10 @@
 module ApplicationHelper
 
   @define_tab = []
-  @define_color = []
-  @define_number = []
 
   def readHeader id
+    @define_tab = nil
+    @define_tab = []
     app_name = App.find(id).name
     text = Array.new
     path ="/Users/wasappliserver/.jenkins/jobs/#{app_name}/workspace/#{app_name}/Constants.h"
@@ -26,8 +26,9 @@ module ApplicationHelper
 
         #on lance la boucle des #define
         for i in 0..@define_tab.count-1
-          #isColor @define_tab[i], id
+          isColor @define_tab[i], id
           isNumber @define_tab[i], id
+          isString @define_tab[i], id
         end
       end
     else
@@ -41,12 +42,11 @@ module ApplicationHelper
     #isColor?
     puts str
     if str =~ /UIColor/
-      @define_color << str
       tab = str.scan(/\S+\s(\S*)\s\[(\S*)\s(.*):([\w]*)\]/m)
       #array of array, access the content from the second table index
       #verification duplicate
       tp Couleur.all
-      query = Couleur.where(:title => tab[0][0])
+      query = Couleur.where(:title => tab[0][0], :app_id => id)
       puts query.to_s + "QUERY \n \n "
       if query.count != 0
         puts 'this entry is already in the database'
@@ -68,12 +68,11 @@ module ApplicationHelper
     #isColor?
     #puts  "STRING" + str
     if str =~ /(\S*)\s(\S*)\s(\d+)/
-      @define_number << str
       tab = str.scan(/(\S*)\s(\S*)\s(\d+)/m)
       #array of array, access the content from the second table index
       #verification duplicate
       puts "tab 0 :" + tab[0][0].to_s + " :::: " + tab[0][1]+ " :::: " + tab[0][2]
-      query = Number.where(:title => tab[0][1])
+      query = Number.where(:title => tab[0][1], :app_id => id)
       #puts query.to_s + "QUERY \n \n "
       if query.count != 0
         puts 'this entry is already in the database'
@@ -87,5 +86,28 @@ module ApplicationHelper
   end
 
   module_function :isNumber
+
+  def isString str, id
+    #isColor?
+    #puts  "STRING" + str
+    if str =~ /(\S*)\s(\S*)\s*(@"\S*")/
+      tab = str.scan(/(\S*)\s(\S*)\s*(@"\S*")/m)
+      #array of array, access the content from the second table index
+      #verification duplicate
+      puts "tab 0 :" + tab[0][0].to_s + " :::: " + tab[0][1]+ " :::: " + tab[0][2]
+      query = AtString.where(:title => tab[0][1], :app_id => id)
+      #puts query.to_s + "QUERY \n \n "
+      if query.count != 0
+        puts 'this entry is already in the database'
+        return false
+      else
+        puts "CREATION D\'UNE LIGNE DANS NUMBER"
+        AtString.create!(title: tab[0][1], value: tab[0][2], app_id: id)
+        #end
+      end
+    end
+  end
+
+  module_function :isString
 end
 

@@ -1,0 +1,2 @@
+module AtStringsHelper
+end
