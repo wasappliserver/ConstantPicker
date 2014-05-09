@@ -7,7 +7,6 @@
   <tr>
     <th><%= model_class.human_attribute_name(:id) %></th>
     <th><%= model_class.human_attribute_name(:name) %></th>
-    <th><%= model_class.human_attribute_name(:admin) %></th>
     <th><%= model_class.human_attribute_name('APPLIS') %></th>
     <th><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
@@ -17,7 +16,6 @@
       <tr>
         <td><%= link_to user.id, user_path(user) %></td>
         <td><%= user.name %></td>
-        <td><%= user.admin %></td>
         <td><%= UsersHelper.allApps user %>
           <%= link_to 'Edit Allowed Apps', edit2_user_path(user), :class => 'btn btn-warning btn-mini' %></td>
         <td>

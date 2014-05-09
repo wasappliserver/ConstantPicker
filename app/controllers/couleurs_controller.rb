@@ -32,9 +32,10 @@ class CouleursController < ApplicationController
 # POST /couleurs.json
   def create
     @couleur = Couleur.new(couleur_params)
+    @couleur.app_id = params[:couleur][:app_id]
     respond_to do |format|
       if @couleur.save
-        format.html { redirect_to couleurs_path, notice: 'Couleur was successfully created.' }
+        format.html { redirect_to couleurs_path(@couleur.app_id), notice: 'Couleur was successfully created.' }
         format.json { render :show, status: :created, location: @couleur }
       else
         format.html { render :new }

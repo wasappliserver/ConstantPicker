@@ -32,9 +32,10 @@ class AtStringsController < ApplicationController
   # POST /at_strings.json
   def create
     @at_string = AtString.new(at_string_params)
+    @at_string.app_id = params[:at_string][:app_id]
     respond_to do |format|
       if @at_string.save
-        format.html { redirect_to at_strings_path, notice: 'At string was successfully created.' }
+        format.html { redirect_to at_strings_path(@at_string.app_id), notice: 'At string was successfully created.' }
         format.json { render :show, status: :created, location: @at_string }
       else
         format.html { render :new }

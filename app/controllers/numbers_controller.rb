@@ -33,9 +33,10 @@ class NumbersController < ApplicationController
 # POST /numbers.json
   def create
     @number = Number.new(number_params)
+    @number.app_id = params[:number][:app_id]
     respond_to do |format|
       if @number.save
-        format.html { redirect_to @number, notice: 'Number was successfully created.' }
+        format.html { redirect_to numbers_path(@number.app_id), notice: 'Number was successfully created.' }
         format.json { render :show, status: :created, location: @number }
       else
         format.html { render :new }

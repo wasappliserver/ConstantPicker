@@ -22,7 +22,12 @@
         <%= f.text_field :value, :class => 'text_field' %>
       </div>
     </div>
-    <%= f.hidden_field :app_id, :value => "#{@number.app_id}" %>
+    <% if (params[:format]!=nil)
+         app_id= params[:format]
+       else
+         app_id = @number.app_id
+       end %>
+    <%= f.hidden_field :app_id, :value => "#{app_id}" %>
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
