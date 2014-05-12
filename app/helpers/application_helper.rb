@@ -61,8 +61,8 @@ module ApplicationHelper
 
   def isNumber str, id
     #isColor?
-    if str =~ /(\S*)\s(\S*)\s(\d+)/
-      tab = str.scan(/(\S*)\s(\S*)\s(\d+)/m)
+    if str =~ /(#\S*)\s(\S*)\s(\d+)/
+      tab = str.scan(/(#\S*)\s(\S*)\s(\d+)/m)
       #array of array, access the content from the second table index
       #verification duplicate
       query = Number.where(:title => tab[0][1], :app_id => id)
