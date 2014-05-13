@@ -34,6 +34,7 @@ class CouleursController < ApplicationController
     @couleur = Couleur.new(couleur_params)
     @couleur.app_id = params[:couleur][:app_id]
     respond_to do |format|
+      @couleur.value_coul=@couleur.value_coul.gsub("#", "0x")
       if @couleur.save
         format.html { redirect_to couleurs_path(@couleur.app_id), notice: 'Couleur was successfully created.' }
         format.json { render :show, status: :created, location: @couleur }
@@ -50,6 +51,8 @@ class CouleursController < ApplicationController
     session[:app_id]=params[:couleur][:app_id]
     respond_to do |format|
       if @couleur.update(couleur_params)
+        @couleur.value_coul = @couleur.value_coul.gsub("#", "0x")
+        @couleur.save
         format.html { redirect_to couleurs_path, notice: 'Couleur was successfully updated.' }
         format.json { render :show, status: :ok, location: @couleur }
       else
@@ -62,9 +65,10 @@ class CouleursController < ApplicationController
 # DELETE /couleurs/1
 # DELETE /couleurs/1.json
   def destroy
+    app_id= @couleur.app_id
     @couleur.destroy
     respond_to do |format|
-      format.html { redirect_to couleurs_url }
+      format.html { redirect_to couleurs_path(app_id) }
       format.json { head :no_content }
     end
   end

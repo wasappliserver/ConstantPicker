@@ -17,5 +17,9 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, notice: "please log in"
     end
   end
+
+  def start_jenkins
+
+  end
 end
 

@@ -33,6 +33,10 @@ class AtStringsController < ApplicationController
   def create
     @at_string = AtString.new(at_string_params)
     @at_string.app_id = params[:at_string][:app_id]
+
+    value_tmp = @at_string.value.scan(/[^@"].+[^"]/)
+    @at_string.value = value_tmp[0]
+
     respond_to do |format|
       if @at_string.save
         format.html { redirect_to at_strings_path(@at_string.app_id), notice: 'At string was successfully created.' }
@@ -51,6 +55,11 @@ class AtStringsController < ApplicationController
     session[:app_id]=params[:at_string][:app_id]
     respond_to do |format|
       if @at_string.update(at_string_params)
+
+        value_tmp = @at_string.value.scan(/[^@"].+[^"]/)
+        @at_string.value = value_tmp[0]
+        @at_string.save
+
         format.html { redirect_to at_strings_path, notice: 'At string was successfully updated.' }
         format.json { render :show, status: :ok, location: @at_string }
       else
@@ -63,9 +72,10 @@ class AtStringsController < ApplicationController
   # DELETE /at_strings/1
   # DELETE /at_strings/1.json
   def destroy
+    app_id = @at_string.app_id
     @at_string.destroy
     respond_to do |format|
-      format.html { redirect_to at_strings_url }
+      format.html { redirect_to at_strings_path(app_id)}
       format.json { head :no_content }
     end
   end

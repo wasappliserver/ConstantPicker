@@ -64,9 +64,10 @@ class NumbersController < ApplicationController
 # DELETE /numbers/1
 # DELETE /numbers/1.json
   def destroy
+    app_id = @number.app_id
     @number.destroy
     respond_to do |format|
-      format.html { redirect_to numbers_url }
+      format.html { redirect_to numbers_path(app_id) }
       format.json { head :no_content }
     end
   end
