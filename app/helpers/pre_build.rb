@@ -24,14 +24,14 @@ end
 
 def compareOneLineN i, row
   data = @lines_init[i].scan(/(#\S+)\s(\S+)\s(\d*)\n/)
-  puts "NUMBER data|||row ===>" + data[0][1].to_s + "|||" + row[0].to_s
+  #puts "NUMBER data|||row ===>" + data[0][1].to_s + "|||" + row[0].to_s
 
   if (data[0][1]==row[0])
-    puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
-    puts "LINE BEFORE" + @lines_final[i].to_s
+    #puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
+    #puts "LINE BEFORE" + @lines_final[i].to_s
     @lines_final[i] = "#define #{row[0]} #{row[1]}\n"
-    puts "LINE AFTER" + @lines_final[i].to_s
-    puts
+    #puts "LINE AFTER" + @lines_final[i].to_s
+    #puts
     return true
   end
   return false
@@ -43,7 +43,7 @@ end
 def compareLinesS row
 
   for i in 0..@lines_init.count-1
-    puts "LIGNE REGARDEE =>" + @lines_init[i].to_s
+    #puts "LIGNE REGARDEE =>" + @lines_init[i].to_s
     if (@lines_init[i]=~ /(\S*)\s(\S*)\s*(@"\S*")/m)
       if (compareOneLineS(i, row))
         return true
@@ -55,14 +55,14 @@ end
 
 def compareOneLineS i, row
   data = @lines_init[i].scan(/(\S*)\s(\S*)\s*(@"\S*")/)
-  puts "String data|||row ===>" + data[0][1].to_s + "|||" + row[0].to_s
+  #puts "String data|||row ===>" + data[0][1].to_s + "|||" + row[0].to_s
 
   if (data[0][1]==row[0])
-    puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
-    puts "LINE BEFORE" + @lines_final[i].to_s
+    # puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
+    #puts "LINE BEFORE" + @lines_final[i].to_s
     @lines_final[i] = "#define #{row[0]} @\"#{row[1]}\"\n"
-    puts "LINE AFTER" + @lines_final[i].to_s
-    puts
+    #puts "LINE AFTER" + @lines_final[i].to_s
+    #puts
     return true
   end
   return false
@@ -74,9 +74,13 @@ end
 def compareLinesC row
 
   for i in 0..@lines_init.count-1
-    #puts "LIGNE REGARDEE =>" + @lines_init[i].to_s
+    puts "LIGNE REGARDEE =>" + @lines_init[i].to_s
     if (@lines_init[i]=~ /\S+\s(\S*)\s\[(\S*)\s(.*):([\w]*)\]/m)
-      if (compareOneLineC(i, row))
+      if (compareOneLineC(i, row, 1))
+        return true
+      end
+    elsif (@lines_init[i]=~ /(#\S+)\s(\S+)\s(\dx\S*)/)
+      if (compareOneLineC(i, row, 2))
         return true
       end
     end
@@ -84,17 +88,31 @@ def compareLinesC row
   return false
 end
 
-def compareOneLineC i, row
-  data = @lines_init[i].scan(/\S+\s(\S*)\s\[(\S*)\s(.*):([\w]*)\]/)
-  puts "Color data|||row ===>" + data[0][0].to_s + "|||" + row[0].to_s
+def compareOneLineC i, row, patt_type
+  if (patt_type == 1)
+    data = @lines_init[i].scan(/\S+\s(\S*)\s\[(\S*)\s(.*):([\w]*)\]/)
+    puts "type 1 Color data|||row ===>" + data[0][0].to_s + "|||" + row[0].to_s
 
-  if (data[0][0]==row[0])
-    puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
-    puts "LINE BEFORE" + @lines_final[i].to_s
-    @lines_final[i] = "#define #{row[0]} [#{row[2]} colorWithHexa:#{row[1]}]\n"
-    puts "LINE AFTER" + @lines_final[i].to_s
-    puts
-    return true
+    if (data[0][0]==row[0])
+      puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
+      puts "LINE BEFORE" + @lines_final[i].to_s
+      @lines_final[i] = "#define #{row[0]} [UIColor colorWithHexa:#{row[1]}]\n"
+      puts "LINE AFTER" + @lines_final[i].to_s
+      puts
+      return true
+    end
+  elsif (patt_type ==2)
+    data = @lines_init[i].scan(/(#\S+)\s(\S+)\s(\dx\S*)/)
+    puts "type 2 Color data|||row ===>" + data[0][1].to_s + "|||" + row[0].to_s
+
+    if (data[0][1]==row[0])
+      puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
+      puts "LINE BEFORE" + @lines_final[i].to_s
+      @lines_final[i] = "#define #{row[0]} #{row[1]}\n"
+      puts "LINE AFTER" + @lines_final[i].to_s
+      puts
+      return true
+    end
   end
   return false
 end
@@ -108,7 +126,7 @@ def addRowNumber row
   for i in 0..@lines_init.count-1
     if (@lines_final[i] =~ /#endif/)
       @lines_final.insert(i-1, "#define #{row[0]} #{row[1]}\n")
-      puts "line i-1 after" + @lines_final[i-1].to_s
+     # puts "line i-1 after" + @lines_final[i-1].to_s
     end
   end
 end
@@ -136,7 +154,7 @@ def addRowString row
   for i in 0..@lines_final.count-1
     if (@lines_final[i] =~ /#endif/)
       @lines_final.insert(i-1, "#define #{row[0]} @\"#{row[1]}\"\n")
-      puts "line i-1 after" + @lines_final[i-1].to_s
+     # puts "line i-1 after" + @lines_final[i-1].to_s
     end
   end
 end

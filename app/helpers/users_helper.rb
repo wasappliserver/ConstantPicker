@@ -1,7 +1,6 @@
 module UsersHelper
 
   def isAdmin(_id)
-    tp(User.all)
     if (_id!= nil)
       user = User.find(_id)
       if (user.admin==true)

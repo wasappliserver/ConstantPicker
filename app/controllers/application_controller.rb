@@ -19,7 +19,10 @@ class ApplicationController < ActionController::Base
   end
 
   def start_jenkins
-
+    respond_to do |format|
+      format.html
+      format.text
+    end
   end
 end
 

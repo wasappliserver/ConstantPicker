@@ -28,7 +28,6 @@ class UsersController < ApplicationController
   end
 
   def app_ids
-    puts "sdfdasfdadf \n \n \n \n "
   end
 
   # POST /users

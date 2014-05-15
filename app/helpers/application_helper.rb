@@ -121,6 +121,7 @@ module ApplicationHelper
 
 #gets all the values from the DB for numbers colors and strings, stores them in array for each
     db = SQLite3::Database.new("/Users/wasappliserver/RubymineProjects/ConstantPicker/db/development.sqlite3")
+    app_name = db.execute("SELECT name FROM apps WHERE id = ?", id)
     @rows_number = db.execute("SELECT title, value FROM numbers WHERE app_id = ?", id)
     @rows_string = db.execute("SELECT title, value FROM at_strings  WHERE app_id = ?", id)
     @rows_color = db.execute("SELECT title, value_coul, coul_type FROM couleurs  WHERE app_id = ?", id)
@@ -131,7 +132,7 @@ module ApplicationHelper
 #display_rows @rows_string
 #display_rows @rows_color
 
-    path="/Users/wasappliserver/Downloads/Constants.h"
+    path="/Users/wasappliserver/.jenkins/jobs/#{app_name[0][0]}/workspace/#{app_name[0][0]}/Constants.h"
 
 #If the file exist
     if (File.exist?(path))
@@ -173,6 +174,8 @@ module ApplicationHelper
         end
 
       end
+    else
+      puts "FILE DOES NOT EXIST in #{path}"
     end
     return @lines_final
 =begin
