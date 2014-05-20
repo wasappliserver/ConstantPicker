@@ -20,7 +20,7 @@ set :term_mode, :nil
 set :shared_paths, ['config/database.yml', 'log']
 
 # Optional settings:
-set :user, 'wasappliserver'    # Username in the server to SSH to.
+set :user, 'wasappliserver' # Username in the server to SSH to.
 #   set :port, '30000'     # SSH port number.
 
 # This task is the environment that is loaded for most commands, such as
@@ -45,7 +45,7 @@ task :setup => :environment do
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
   queue! %[touch "#{deploy_to}/shared/config/database.yml"]
-  queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
+  queue %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
 end
 
 desc "Deploys the current version to the server."
@@ -56,8 +56,8 @@ task :deploy => :environment do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
-   # invoke :'rails:db_migrate'
-    #invoke :'rails:assets_precompile'
+    invoke :'rails:db_migrate'
+    invoke :'rails:assets_precompile'
 
     to :launch do
       queue "touch #{deploy_to}/tmp/restart.txt"
