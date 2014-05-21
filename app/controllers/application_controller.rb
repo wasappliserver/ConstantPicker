@@ -24,5 +24,7 @@ class ApplicationController < ActionController::Base
       format.text
     end
   end
+
+
 end
 

@@ -4,14 +4,15 @@ Rails.application.routes.draw do
 
   resources :numbers
 
-  get 'admin' => 'static#home'
-  get 'start_jenkins' => 'static#start_jenkins'
+  get 'admin' => 'menu#home'
+  get 'start_jenkins' => 'apps#start_jenkins'
+  get 'start_jenkins_text' => 'apps#start_jenkins_text'
 
   controller :sessions do
     post 'login' => :create
     delete 'logout' => :destroy
-    get 'logout' => 'static#home'
-    get 'login' => 'static#home'
+    get 'logout' => 'menu#home'
+    get 'login' => 'menu#home'
   end
 
   get 'sessions/new'
@@ -34,7 +35,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'static#home'
+  root 'menu#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -71,4 +71,14 @@ class AppsController < ApplicationController
   def app_params
     params.require(:app).permit(:name, :couleur_id)
   end
+
+  def start_jenkins_text
+    puts "APPEL START JENKINS TEXT"
+    lines_final = ApplicationHelper.getStrings(params[:format])
+    lines = String.new
+    lines_final.each do |line|
+      lines << line.to_s
+    end
+    render plain: lines.to_s
+  end
 end
