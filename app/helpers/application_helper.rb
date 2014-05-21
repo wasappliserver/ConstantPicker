@@ -48,7 +48,7 @@ module ApplicationHelper
       #tp Couleur.all
       query = Couleur.where(:title => tab[0][0], :app_id => id)
       if query.count != 0
-        puts 'this entry is already in the database'
+        #puts 'this entry is already in the database'
         return false
       else
         Couleur.create!(title: tab[0][0], coul_type: tab[0][1], value_coul: tab[0][3], app_id: id)
@@ -61,7 +61,7 @@ module ApplicationHelper
       #tp Couleur.all
       query = Couleur.where(:title => tab[0][1], :app_id => id)
       if query.count != 0
-        puts 'this entry is already in the database'
+        #puts 'this entry is already in the database'
         return false
       else
         Couleur.create!(title: tab[0][1], coul_type: nil, value_coul: tab[0][2], app_id: id)
@@ -82,7 +82,7 @@ module ApplicationHelper
       #verification duplicate
       query = Number.where(:title => tab[0][1], :app_id => id)
       if query.count != 0
-        puts 'this entry is already in the database'
+        #puts 'this entry is already in the database'
         return false
       else
         Number.create!(title: tab[0][1], value: tab[0][2], app_id: id)
@@ -101,7 +101,7 @@ module ApplicationHelper
       #verification duplicate
       query = AtString.where(:title => tab[0][1], :app_id => id)
       if query.count != 0
-        puts 'this entry is already in the database'
+        #puts 'this entry is already in the database'
         return false
       else
         tmp = tab[0][2].scan(/[^@"].+[^"]/)
@@ -114,17 +114,19 @@ module ApplicationHelper
 
   module_function :isString
 
-  def getStrings app_id
-    id = app_id
+  def getStrings app_name
+    name = app_name
     init
 
 
 #gets all the values from the DB for numbers colors and strings, stores them in array for each
     db = SQLite3::Database.new("/Users/wasappliserver/RubymineProjects/ConstantPicker/db/development.sqlite3")
-    app_name = db.execute("SELECT name FROM apps WHERE id = ?", id)
-    @rows_number = db.execute("SELECT title, value FROM numbers WHERE app_id = ?", id)
-    @rows_string = db.execute("SELECT title, value FROM at_strings  WHERE app_id = ?", id)
-    @rows_color = db.execute("SELECT title, value_coul, coul_type FROM couleurs  WHERE app_id = ?", id)
+    app = App.find_by name: name
+#puts app.to_s + "APP"
+# = db.exe cute("SELECT name FROM apps WHERE name = ?", name)
+    @rows_number = db.execute("SELECT title, value FROM numbers WHERE app_id = ?", app.id)
+    @rows_string = db.execute("SELECT title, value FROM at_strings  WHERE app_id = ?", app.id)
+    @rows_color = db.execute("SELECT title, value_coul, coul_type FROM couleurs  WHERE app_id = ?", app.id)
 
 #log display
 
@@ -132,7 +134,7 @@ module ApplicationHelper
 #display_rows @rows_string
 #display_rows @rows_color
 
-    path="/Users/wasappliserver/.jenkins/jobs/#{app_name[0][0]}/workspace/#{app_name[0][0]}/Constants.h"
+    path="/Users/wasappliserver/.jenkins/jobs/#{app.name}/workspace/#{app.name}/Constants.h"
 
 #If the file exist
     if (File.exist?(path))
@@ -144,13 +146,12 @@ module ApplicationHelper
 
 
         @rows_number.each do |row|
-          puts "ROW ==>" + row.to_s
+          #puts "ROW ==>" + row.to_s
 
 
           if (compareLinesN(row)== false)
             #ADD THE ROWWWW
-            puts
-            puts "ADD NEW ROW NUMBER"
+            #puts "ADD NEW ROW NUMBER"
             addRowNumber row
           end
         end
@@ -158,8 +159,7 @@ module ApplicationHelper
         @rows_color.each do |row|
           if (compareLinesC(row)== false)
             #ADD THE ROWWWW
-            puts
-            puts "ADD NEW ROW COLOR"
+            #puts "ADD NEW ROW COLOR"
             addRowColor row
           end
         end
@@ -167,8 +167,7 @@ module ApplicationHelper
         @rows_string.each do |row|
           if (compareLinesS(row)== false)
             #ADD THE ROWWWW
-            puts
-            puts "ADD NEW ROW String"
+            #puts "ADD NEW ROW String"
             addRowString row
           end
         end
@@ -178,19 +177,6 @@ module ApplicationHelper
       puts "FILE DOES NOT EXIST in #{path}"
     end
     return @lines_final
-=begin
-    @lines_final.each do |line|
-      data << line
-      return data
-    end
-=end
-=begin
-    File.open(path, 'w') do |file|
-      @lines_final.each do |line|
-        file << line.to_s
-      end
-    end
-=end
   end
 
   module_function :getStrings

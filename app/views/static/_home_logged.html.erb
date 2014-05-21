@@ -28,7 +28,7 @@
           <td><%= link_to 'Modify Colors', couleurs_path(app.id), :class => "btn btn-small btn-success" %></td>
           <td><%= link_to 'Modify Numbers', numbers_path(app.id), :class => "btn btn-small btn-danger" %></td>
           <td><%= link_to 'Modify Strings', at_strings_path(app.id), :class => "btn btn-small btn-primary" %></td>
-          <td><%= link_to 'Launch Jenkins', start_jenkins_path(app.id), :class => "btn btn-small btn-warning" %></td>
+          <td><%= link_to 'Launch Jenkins', start_jenkins_path(app.name), :class => "btn btn-small btn-warning" %></td>
         </tr>
     <% end %>
     </tbody>

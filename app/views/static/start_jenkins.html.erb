@@ -1,11 +1,11 @@
-<!--
+<%= link_to 'Go Back', root_path, :class => "btn btn-big btn-primary" %>
 <br>
-<%= link_to 'Go Back', root_path, :class => "btn btn-small btn-primary" %>
 <br>
-
-
-<% lines_final = ApplicationHelper.getStrings(params[:format]) %>
-<% lines_final.each do |line| %>
+<pre style="font-size: 10px">
+~text~
+  <% lines_final = ApplicationHelper.getStrings(params[:format]) %>
+  <% lines_final.each do |line| %>
     <%= line.to_s %>
 <% end %>
--->
+  ~textend~
+</pre>
