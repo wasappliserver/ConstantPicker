@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :numbers
 
   get 'admin' => 'menu#home'
-  get 'start_jenkins' => 'apps#start_jenkins'
-  get 'start_jenkins_text' => 'apps#start_jenkins_text'
+  get 'start_jenkins' => 'menu#start_jenkins'
+  get 'start_jenkins_text' => 'menu#start_jenkins_text.text'
 
   controller :sessions do
     post 'login' => :create

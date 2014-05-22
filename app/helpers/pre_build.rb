@@ -26,10 +26,10 @@ def compareOneLineN i, row
   data = @lines_init[i].scan(/(#\S+)\s(\S+)\s(\d*)\n/)
   #puts "NUMBER data|||row ===>" + data[0][1].to_s + "|||" + row[0].to_s
 
-  if (data[0][1]==row[0])
+  if (data[0][1]==row.title)
     #puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
     #puts "LINE BEFORE" + @lines_final[i].to_s
-    @lines_final[i] = "#define #{row[0]} #{row[1]}\n"
+    @lines_final[i] = "#define #{row.title} #{row.value}\n"
     #puts "LINE AFTER" + @lines_final[i].to_s
     #puts
     return true
@@ -57,10 +57,10 @@ def compareOneLineS i, row
   data = @lines_init[i].scan(/(\S*)\s(\S*)\s*(@"\S*")/)
   #puts "String data|||row ===>" + data[0][1].to_s + "|||" + row[0].to_s
 
-  if (data[0][1]==row[0])
+  if (data[0][1]==row.title)
     # puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
     #puts "LINE BEFORE" + @lines_final[i].to_s
-    @lines_final[i] = "#define #{row[0]} @\"#{row[1]}\"\n"
+    @lines_final[i] = "#define #{row.title} @\"#{row.value}\"\n"
     #puts "LINE AFTER" + @lines_final[i].to_s
     #puts
     return true
@@ -74,7 +74,7 @@ end
 def compareLinesC row
 
   for i in 0..@lines_init.count-1
-    puts "LIGNE REGARDEE =>" + @lines_init[i].to_s
+    #puts "LIGNE REGARDEE =>" + @lines_init[i].to_s
     if (@lines_init[i]=~ /\S+\s(\S*)\s\[(\S*)\s(.*):([\w]*)\]/m)
       if (compareOneLineC(i, row, 1))
         return true
@@ -91,26 +91,26 @@ end
 def compareOneLineC i, row, patt_type
   if (patt_type == 1)
     data = @lines_init[i].scan(/\S+\s(\S*)\s\[(\S*)\s(.*):([\w]*)\]/)
-    puts "type 1 Color data|||row ===>" + data[0][0].to_s + "|||" + row[0].to_s
+    #puts "type 1 Color data|||row ===>" + data[0][0].to_s + "|||" + row.coul_type.to_s
 
-    if (data[0][0]==row[0])
-      puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
-      puts "LINE BEFORE" + @lines_final[i].to_s
-      @lines_final[i] = "#define #{row[0]} [UIColor colorWithHexa:#{row[1]}]\n"
-      puts "LINE AFTER" + @lines_final[i].to_s
-      puts
+    if (data[0][0]==row.title)
+      # puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
+     #puts "LINE BEFORE" + @lines_final[i].to_s
+      @lines_final[i] = "#define #{row.title} [UIColor colorWithHexa:#{row.value_coul}]\n"
+     #puts "LINE AFTER" + @lines_final[i].to_s
+     #puts
       return true
     end
   elsif (patt_type ==2)
     data = @lines_init[i].scan(/(#\S+)\s(\S+)\s(\dx\S*)/)
-    puts "type 2 Color data|||row ===>" + data[0][1].to_s + "|||" + row[0].to_s
+    #puts "type 2 Color data|||row ===>" + data[0][1].to_s + "|||" + row.coul_type.to_s
 
-    if (data[0][1]==row[0])
-      puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
-      puts "LINE BEFORE" + @lines_final[i].to_s
-      @lines_final[i] = "#define #{row[0]} #{row[1]}\n"
-      puts "LINE AFTER" + @lines_final[i].to_s
-      puts
+    if (data[0][1]==row.title)
+      # puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
+      # puts "LINE BEFORE" + @lines_final[i].to_s
+       @lines_final[i] = "#define #{row.title} #{row.value_coul}\n"
+      # puts "LINE AFTER" + @lines_final[i].to_s
+      #puts
       return true
     end
   end
@@ -125,8 +125,8 @@ def addRowNumber row
   #on doit atteindre le #endif et ecrire avant
   for i in 0..@lines_init.count-1
     if (@lines_final[i] =~ /#endif/)
-      @lines_final.insert(i-1, "#define #{row[0]} #{row[1]}\n")
-     # puts "line i-1 after" + @lines_final[i-1].to_s
+      @lines_final.insert(i-1, "#define #{row.title} #{row.value}\n")
+      # puts "line i-1 after" + @lines_final[i-1].to_s
     end
   end
 end
@@ -139,8 +139,8 @@ def addRowColor row
   #on doit atteindre le #endif et ecrire avant
   for i in 0..@lines_final.count-1
     if (@lines_final[i] =~ /#endif/)
-      @lines_final.insert(i-1, "#define #{row[0]} [#{row[2]} colorWithHexa:#{row[1]}]\n")
-      puts "line i-1 after" + @lines_final[i-1].to_s
+      @lines_final.insert(i-1, "#define #{row.title} [#{row.coul_type} colorWithHexa:#{row.value_coul}]\n")
+      # puts "line i-1 after" + @lines_final[i-1].to_s
     end
   end
 end
@@ -153,8 +153,8 @@ def addRowString row
   #on doit atteindre le #endif et ecrire avant
   for i in 0..@lines_final.count-1
     if (@lines_final[i] =~ /#endif/)
-      @lines_final.insert(i-1, "#define #{row[0]} @\"#{row[1]}\"\n")
-     # puts "line i-1 after" + @lines_final[i-1].to_s
+      @lines_final.insert(i-1, "#define #{row.title} @\"#{row.value}\"\n")
+      # puts "line i-1 after" + @lines_final[i-1].to_s
     end
   end
 end

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
+//= require jquery.tablesorter.min
 //= require_tree .
 
 
@@ -25,7 +26,15 @@ minicolor = function () {
     });
 };
 
+
 $(document).ready(minicolor);
 $(document).on('page:load', minicolor);
 
+var tablesort;
+tablesort = function () {
+    $("#myTable").tablesorter();
+};
+
+$(document).ready(tablesort);
+$(document).on('page:load', tablesort);
 

@@ -115,24 +115,26 @@ module ApplicationHelper
   module_function :isString
 
   def getStrings app_name
-    name = app_name
     init
 
-
 #gets all the values from the DB for numbers colors and strings, stores them in array for each
-    db = SQLite3::Database.new("/Users/wasappliserver/RubymineProjects/ConstantPicker/db/development.sqlite3")
-    app = App.find_by name: name
+#db = SQLite3::Database.new("/Users/wasappliserver/RubymineProjects/ConstantPicker/db/development.sqlite3")
+    app = App.find_by name: app_name
 #puts app.to_s + "APP"
 # = db.exe cute("SELECT name FROM apps WHERE name = ?", name)
-    @rows_number = db.execute("SELECT title, value FROM numbers WHERE app_id = ?", app.id)
-    @rows_string = db.execute("SELECT title, value FROM at_strings  WHERE app_id = ?", app.id)
-    @rows_color = db.execute("SELECT title, value_coul, coul_type FROM couleurs  WHERE app_id = ?", app.id)
+    @rows_number = Number.where("app_id = '#{app.id}'")
+    @rows_string = AtString.where("app_id = '#{app.id}'")
+    @rows_color = Couleur.where("app_id = '#{app.id}'")
 
-#log display
+    #@rows_number = db.execute("SELECT title, value FROM numbers WHERE app_id = ?", app.id)
+    #@rows_string = db.execute("SELECT title, value FROM at_strings  WHERE app_id = ?", app.id)
+    #@rows_color = db.execute("SELECT title, value_coul, coul_type FROM couleurs  WHERE app_id = ?", app.id)
 
-#display_rows @rows_number
-#display_rows @rows_string
-#display_rows @rows_color
+    #log display
+
+    #display_rows @rows_number
+    #display_rows @rows_string
+    #display_rows @rows_color
 
     path="/Users/wasappliserver/.jenkins/jobs/#{app.name}/workspace/#{app.name}/Constants.h"
 
@@ -146,7 +148,6 @@ module ApplicationHelper
 
 
         @rows_number.each do |row|
-          #puts "ROW ==>" + row.to_s
 
 
           if (compareLinesN(row)== false)
@@ -157,6 +158,8 @@ module ApplicationHelper
         end
 
         @rows_color.each do |row|
+          puts "ROW ==>" + row.title + row.value_coul+ row.coul_type.to_s
+
           if (compareLinesC(row)== false)
             #ADD THE ROWWWW
             #puts "ADD NEW ROW COLOR"
@@ -173,11 +176,15 @@ module ApplicationHelper
         end
 
       end
+
     else
       puts "FILE DOES NOT EXIST in #{path}"
+
     end
+
     return @lines_final
   end
+
 
   module_function :getStrings
 end

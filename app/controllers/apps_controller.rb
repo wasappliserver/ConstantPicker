@@ -1,6 +1,18 @@
 class AppsController < ApplicationController
   before_action :set_app, only: [:show, :edit, :update, :destroy]
 
+
+  #GET /start_jenkins_text.~App Name~
+  def start_jenkins_text
+    puts "APPEL START JENKINS TEXT"
+    lines_final = ApplicationHelper.getStrings(params[:format])
+    lines = String.new
+    lines_final.each do |line|
+      lines << line.to_s
+    end
+    render plain: lines.to_s
+  end
+
   # GET /apps
   # GET /apps.json
   def index
@@ -20,6 +32,7 @@ class AppsController < ApplicationController
   # GET /apps/1/edit
   def edit
   end
+
 
   # POST /apps
   # POST /apps.json
@@ -72,13 +85,5 @@ class AppsController < ApplicationController
     params.require(:app).permit(:name, :couleur_id)
   end
 
-  def start_jenkins_text
-    puts "APPEL START JENKINS TEXT"
-    lines_final = ApplicationHelper.getStrings(params[:format])
-    lines = String.new
-    lines_final.each do |line|
-      lines << line.to_s
-    end
-    render plain: lines.to_s
-  end
+
 end
