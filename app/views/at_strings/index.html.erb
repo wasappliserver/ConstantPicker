@@ -1,38 +1,40 @@
 <%- model_class = AtString -%>
-<%  %>
-<div class="page-header">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize, :class => "text-center" %> de
-    l'application <%= @app.name %> </h1>
-</div>
+<% %>
+<section class="wrapper" id="main-content">
+  <div class="page-header">
+    <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize, :class => "text-center" %> de
+      l'application <%= @app.name %> </h1>
+  </div>
 
-<table id="myTable" class="table table-striped tablesorter">
-  <thead>
-  <tr>
-    <th><%= model_class.human_attribute_name(:id) %></th>
-    <th><%= model_class.human_attribute_name(:title) %></th>
-    <th><%= model_class.human_attribute_name(:value) %></th>
-    <th><%= t '.actions', :default => t("helpers.actions") %></th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @app.at_strings.each do |at_string| %>
-      <tr>
-        <td><%= link_to at_string.id, at_string_path(at_string) %></td>
-        <td><%= at_string.title %></td>
-        <td><%= at_string.value %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_at_string_path(at_string), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      at_string_path(at_string),
-                      :method => :delete,
-                      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+  <table  class="table table-striped wrapper">
+    <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:value) %></th>
+      <th><%= t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @app.at_strings.each do |at_string| %>
+        <tr>
+          <td><%= link_to at_string.id, at_string_path(at_string) %></td>
+          <td><%= at_string.title %></td>
+          <td><%= at_string.value %></td>
+          <td>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_at_string_path(at_string), :class => 'btn btn-mini' %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        at_string_path(at_string),
+                        :method => :delete,
+                        :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                        :class => 'btn btn-mini btn-danger' %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New String', new_at_string_path(@app.id), :class => 'btn btn-info' %>
-<%= link_to "Back to menu", root_path, :class => 'btn btn-secondary' %>
+  <%= link_to 'New String', new_at_string_path(@app.id), :class => 'btn btn-info' %>
+  <%= link_to "Back to menu", root_path, :class => 'btn btn-secondary' %>
+</section>

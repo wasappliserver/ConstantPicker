@@ -12,9 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
-//= require turbolinks
+//= require bootstrap.min
 //= require jquery.tablesorter.min
+//= require jquery.nicescroll
+//= require jquery.dcjqaccordion.2.7
 //= require_tree .
 
 

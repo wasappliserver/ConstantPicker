@@ -2,13 +2,63 @@
 <html>
 <head>
   <title>FacePickers</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<section id="container">
+  <header class="header white-bg">
+    <div class="sidebar-toggle-box">
+      <div class="fa fa-bars" data-placement="right" data-original-title="Toggle Navigation"></div>
+    </div>
+    <%= link_to "HOME", root_path, :class => 'logo' %>
+    <h1 class="text-center">Wasappli Constant Picker</h1>
+  </header>
+  <% if (session[:user_id]!= nil) %>
+      <aside>
+        <div id="sidebar" class="nav-collapse " tabindex="5000" style="overflow: hidden; outline: none;">
 
-<%= yield %>
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu" id="nav-accordion">
+
+            <!--multi level menu start-->
+            <li class="sub-menu dcjq-parent-li">
+              <a href="javascript:;" class="dcjq-parent">
+                <i class="fa fa-sitemap"></i>
+                <span>Application List:</span>
+                <span class="dcjq-icon"></span></a>
+              <ul class="sub" style="display: none;">
+                <!--Sub Menu start-->
+                <% user = User.find(session[:user_id]); %>
+                <% user.apps.each do |app| %>
+                    <li class="sub-menu dcjq-parent-li">
+                      <a href="boxed_page.html" class="dcjq-parent"><%= app.name %><span class="dcjq-icon"></span></a>
+                      <ul class="sub" style="display: none;">
+                        <li><%= link_to 'Modify Colors', couleurs_path(app.id) %></li>
+
+                        <li><%= link_to 'Modify Numbers', numbers_path(app.id) %></li>
+
+                        <li><%= link_to 'Modify Strings', at_strings_path(app.id) %></li>
+
+                        <li><%= link_to 'Launch Jenkins', start_jenkins_path(app.name) %></li>
+
+                      </ul>
+                    </li>
+                <% end %>
+              </ul>
+            </li>
+
+            <!--multi level menu end-->
+          </ul>
+
+          <!-- sidebar menu end-->
+        </div>
+
+      </aside>
+  <% end %>
+  <%= yield %>
+</section>
 
 </body>
 </html>

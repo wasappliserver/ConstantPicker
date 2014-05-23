@@ -1,20 +1,20 @@
-<div class="depot_form">
+<div class="depot_form container">
   <% if flash[:alert] %>
       <p id="notice"><%= flash[:alert] %></p>
   <% end %>
-  <%= form_tag login_path do %>
+  <%= form_tag login_path, class: "form-signin" do %>
       <fieldset>
-        <legend>Please Log In</legend>
-        <div>
+        <h2 class="form-signin-heading">Please Log In</h2>
+
+        <div class="login-wrap">
           <%= label_tag :name, 'Name:' %>
-          <%= text_field_tag :name, params[:name] %>
-        </div>
-        <div>
+          <%= text_field_tag :name, params[:name], class: "form-control", placeholder: "User ID", style: "width : 100%" %>
+
+
           <%= label_tag :password, 'Password:' %>
-          <%= password_field_tag :password, params[:password] %>
+          <%= password_field_tag :password, params[:password], placeholder: "Password", class: "form-control", style: "width : 100%" %>
+          <%= submit_tag "Login", :class => "btn btn-large btn-login btn-block " %>
         </div>
-        <div>
-          <%= submit_tag "Login",:class => "btn btn-info"  %> </div>
       </fieldset>
   <% end %>
 </div>

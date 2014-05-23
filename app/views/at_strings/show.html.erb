@@ -1,14 +1,16 @@
-<p id="notice"><%= notice %></p>
+<section class="wrapper" id="main-content">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @at_string.title %>
-</p>
+  <p>
+    <strong>Title:</strong>
+    <%= @at_string.title %>
+  </p>
 
-<p>
-  <strong>Value:</strong>
-  <%= @at_string.value %>
-</p>
+  <p>
+    <strong>Value:</strong>
+    <%= @at_string.value %>
+  </p>
 
-<%= link_to 'Edit', edit_at_string_path(@at_string) %> |
-<%= link_to 'Back', at_strings_path %>
+  <%= link_to 'Edit', edit_at_string_path(@at_string) %> |
+  <%= link_to 'Back', at_strings_path %>
+</section>

@@ -2,42 +2,17 @@
 <html>
 <body>
 
-<div class="center herounit">
-  <h1 class="text-center">Welcome to Wasappli Constant Picker</h1>
-  <% if (session[:user_id]!= nil) %>
-      <%= render :partial => "menu/home_logged" %>
-  <% end %>
-</div>
+<% if (session[:user_id]!= nil) %>
+    <%= render :partial => "menu/home_logged" %>
+<% end %>
 
 
-<div class="panel panel-default">
-
-  <% if (session[:user_id]== nil) %>
-
-      <div class="well text-center">
-        <div class="panel-group" id="accordion">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                  Create an account here
-                </a>
-              </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse">
-              <div class="panel-body">
-                <%= render :partial => "users/new_usr" %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="well text-center">
-        <%= render :partial => "sessions/new" %>
-      </div>
-  <% end %>
-
-</div>
+<% if (session[:user_id]== nil) %>
+    <div class="container">
+      <%= render :partial => "sessions/new" %>
+    </div>
+<% end %>
 
 </body>
 </html>
+

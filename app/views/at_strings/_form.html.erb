@@ -1,3 +1,4 @@
+<section class="wrapper">
 <%= form_for @at_string, :html => {:class => 'form-horizontal'} do |f| %>
     <% if @at_string.errors.any? %>
         <div id="error_explanation">
@@ -34,3 +35,4 @@
                   at_strings_path(@at_string.app_id), :class => 'btn' %>
     </div>
 <% end %>
+</section>

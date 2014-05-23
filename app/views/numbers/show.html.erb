@@ -1,20 +1,22 @@
-<p id="notice"><%= notice %></p>
+<section class="wrapper" id="main-content">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @number.title %>
-</p>
+  <p>
+    <strong>Title:</strong>
+    <%= @number.title %>
+  </p>
 
-<p>
-  <strong>Value:</strong>
-  <%= @number.value %>
-</p>
+  <p>
+    <strong>Value:</strong>
+    <%= @number.value %>
+  </p>
 
 
-<p>
-  <strong>APP ID:</strong>
-  <%= @number.app_id %>
-</p>
+  <p>
+    <strong>APP ID:</strong>
+    <%= @number.app_id %>
+  </p>
 
-<%= link_to 'Edit', edit_number_path(@number) %> |
-<%= link_to 'Back', numbers_path %>
+  <%= link_to 'Edit', edit_number_path(@number) %> |
+  <%= link_to 'Back', numbers_path %>
+</section>
