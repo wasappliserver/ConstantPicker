@@ -1,38 +1,40 @@
-<section class="wrapper">
-<%= form_for @at_string, :html => {:class => 'form-horizontal'} do |f| %>
-    <% if @at_string.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@at_string.errors.count, "error") %> prohibited this color from being saved:</h2>
+<div class="panel-body">
+	<%= form_for @at_string, :html => {:class => 'panel'} do |f| %>
+	<% if @at_string.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@at_string.errors.count, "error") %> prohibited this color from being saved:</h2>
 
-          <ul>
-            <% @at_string.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-    <div class="control-group">
-      <%= f.label :title, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :title, :class => 'text_field' %>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :value, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :value, :class => 'text_field' %>
-      </div>
-    </div>
-    <% if (params[:format]!=nil)
-         app_id= params[:format]
-       else
-         app_id = @at_string.app_id
-       end %>
-    <%= f.hidden_field :app_id, :value => "#{app_id}" %>
-    <div class="form-actions">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  at_strings_path(@at_string.app_id), :class => 'btn' %>
-    </div>
-<% end %>
-</section>
+		<ul>
+			<% @at_string.errors.full_messages.each do |message| %>
+			<li>
+				<%= message %>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+	<div class="form-group">
+		<%= f.label :title, :class => 'control-label' %>
+		<div class="controls">
+			<%= f.text_field :title, :class => 'form-control' %>
+		</div>
+	</div>
+	<div class="form-group">
+		<%= f.label :value, :class => 'control-label' %>
+		<div class="controls">
+			<%= f.text_field :value, :class => 'form-control' %>
+		</div>
+	</div>
+	<% if (params[:format]!=nil)
+      app_id= params[:format]
+    else
+    app_id = @at_string.app_id
+    end %>
+	<%= f.hidden_field :app_id, :value => "#{app_id}" %>
+	<div class="form-actions">
+		<%= f.submit nil, :class => 'btn btn-primary' %>
+		<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+		at_strings_path(app_id), :class => 'btn' %>
+	</div>
+	<% end %>
+</div>

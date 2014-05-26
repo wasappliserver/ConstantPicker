@@ -3,13 +3,13 @@
 $(function() {
     $('#nav-accordion').dcAccordion({
         eventType: 'click',
-        autoClose: true,
+        autoClose: false,
         saveState: true,
         disableLink: true,
-        speed: 'slow',
+        speed: 'fast',
         showCount: false,
         autoExpand: true,
-//        cookie: 'dcjq-accordion-1',
+        cookie: 'dcjq-accordion-1',
         classExpand: 'dcjq-current-parent'
     });
 });
@@ -110,8 +110,8 @@ var Script = function () {
             $(this).find(".value").html("");
             $(this).find(".value").animate({
                 height: i
-            }, 2000)
-        })
+            }, 2000);
+        });
     }
 
 
