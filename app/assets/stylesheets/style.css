@@ -4336,10 +4336,6 @@ td.details table tr td, .dataTable tr:last-child {
     padding: 15px 0;
 }
 
-.adv-table .dataTables_length, .adv-table .dataTables_filter {
-    padding: 15px 0;
-}
-
 .cke_chrome {
     border: none !important;
 }

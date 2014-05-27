@@ -17,25 +17,30 @@
 //= require jquery.nicescroll
 //= require jquery.dcjqaccordion.2.7
 //= require_tree .
-
+//= require DT_bootstrap
+//= require jquery.dataTables
 
 var minicolor;
-minicolor = function () {
+minicolor = function() {
 
-    $('#minicolor').each(function () {
-        $(this).minicolors({defaultValue: $(this).attr('data_defaultValue')});
-    });
+	$('#minicolor').each(function() {
+		$(this).minicolors({
+			defaultValue : $(this).attr('data_defaultValue')
+		});
+	});
 };
-
 
 $(document).ready(minicolor);
 $(document).on('page:load', minicolor);
 
 var tablesort;
-tablesort = function () {
-    $("#myTable").tablesorter();
+tablesort = function() {
+	$("#myTable").tablesorter();
 };
 
 $(document).ready(tablesort);
 $(document).on('page:load', tablesort);
 
+$(document).ready(function() {
+	$('#example').dataTable();
+});

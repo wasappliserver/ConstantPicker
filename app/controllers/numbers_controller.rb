@@ -48,7 +48,6 @@ class NumbersController < ApplicationController
 # PATCH/PUT /numbers/1
 # PATCH/PUT /numbers/1.json
   def update
-    puts params.to_s
     session[:app_id]=params[:number][:app_id]
     respond_to do |format|
       if @number.update(number_params)

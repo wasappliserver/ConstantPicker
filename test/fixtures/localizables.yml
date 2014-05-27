@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  key: MyString
+  value: MyString
+  lang: MyString
+  app_id: 1
+  missing: 
+
+two:
+  key: MyString
+  value: MyString
+  lang: MyString
+  app_id: 1
+  missing: 

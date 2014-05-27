@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Key:</strong>
+  <%= @localizable.key %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @localizable.value %>
+</p>
+
+<p>
+  <strong>Lang:</strong>
+  <%= @localizable.lang %>
+</p>
+
+<p>
+  <strong>App:</strong>
+  <%= @localizable.app_id %>
+</p>
+
+<p>
+  <strong>Missing:</strong>
+  <%= @localizable.missing %>
+</p>
+
+<%= link_to 'Edit', edit_localizable_path(@localizable) %> |
+<%= link_to 'Back', localizables_path %>

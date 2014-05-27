@@ -1,0 +1,41 @@
+<%- model_class = Localizable -%>
+<% %>
+<section class="wrapper" id="main-content">
+	<div class="page-header">
+		<h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize, :class => "text-center" %> de
+		l'application <%= @app.name %> </h1>
+	</div>
+
+	<table  class="table table-striped wrapper">
+		<thead>
+			<tr>
+				<th>Key</th>
+				<th>Value</th>
+				<th>Lang</th>
+				<th>App</th>
+				<th><%= t '.actions', :default => t("helpers.actions") %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @app.localizable.each do |localizable| %>
+			<tr>
+				<td><%= link_to localizable.id, localizable_path(localizable) %></td>
+				<td><%= localizable.key_loc %></td>
+				<td><%= localizable.value %></td>
+				<td><%= localizable.lang %></td>
+				<td><%= @app.name %></td>
+				<td> <%= link_to t('.edit', :default => t("helpers.links.edit")),
+				edit_localizable_path(at_string), :class => 'btn btn-mini' %>
+				<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+				localizable_path(localizable),
+				:method => :delete,
+				:data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+				:class => 'btn btn-mini btn-danger' %> </td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<%= link_to 'New Localizable Value', new_localizable_path(@app.id), :class => 'btn btn-info' %>
+	<%= link_to "Back to menu", root_path, :class => 'btn btn-secondary' %>
+</section>
