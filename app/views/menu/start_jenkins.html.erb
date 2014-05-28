@@ -1,9 +1,11 @@
+<br>
+<br>
 <section class="wrapper" id="main-content">
 	<%= link_to 'Go Back', root_path, :class => "btn btn-big btn-primary" %>
 	<br>
 	<br>
 	<pre style="font-size: 10px">
-  <% lines_final = ApplicationHelper.getStrings(params[:format]) %>
+  <% lines_final = ApplicationHelper.getStrings(params[:name]) %>
   <% lines_final.each do |line| %>
     <%= line.to_s %>
 <% end %>

@@ -4,15 +4,9 @@ class LocalizablesController < ApplicationController
   # GET /localizables
   # GET /localizables.json
   def index
-    puts "INDECXX"
     @user=User.find(session[:user_id])
-    if (params.has_key?(:format))
-      @app = @user.apps.find(params[:format])
-      LocalizablesHelper.getLang params[:format]
-    elsif (session.has_key?(:app_id))
-      @app = @user.apps.find(session[:app_id])
-      LocalizablesHelper.getLang session[:app_id]
-    end
+    @app = @user.apps.find(params[:app_id])
+    ApplicationHelper.readHeader params[:app_id]
   end
 
   # GET /localizables/1
@@ -75,11 +69,14 @@ class LocalizablesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_localizable
-   ##@localizable = Localizable.find(params[:id])
+   @localizable = Localizable.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def localizable_params
     params.require(:localizable).permit(:key, :value, :lang, :app_id, :missing)
+  end
+
+  def getMissingLocalizable
   end
 end

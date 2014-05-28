@@ -5,13 +5,8 @@ class AtStringsController < ApplicationController
   # GET /at_strings.json
   def index
     @user=User.find(session[:user_id])
-    if (params.has_key?(:format))
-      @app = @user.apps.find(params[:format])
-      ApplicationHelper.readHeader params[:format]
-    elsif (session.has_key?(:app_id))
-      @app = @user.apps.find(session[:app_id])
-      ApplicationHelper.readHeader session[:app_id]
-    end
+    @app = @user.apps.find(params[:app_id])
+    ApplicationHelper.readHeader params[:app_id]
   end
 
   # GET /at_strings/1

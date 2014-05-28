@@ -4,7 +4,6 @@ class AppsController < ApplicationController
 
   #GET /start_jenkins_text.~App Name~
   def start_jenkins_text
-    puts "APPEL START JENKINS TEXT"
     lines_final = ApplicationHelper.getStrings(params[:format])
     lines = String.new
     lines_final.each do |line|

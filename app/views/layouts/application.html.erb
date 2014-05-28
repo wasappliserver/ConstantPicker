@@ -1,95 +1,102 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>FacePickers</title>
-		<%= stylesheet_link_tag 'application', media: 'all' %>
-		<%= javascript_include_tag 'application' %>
-		<%= csrf_meta_tags %>
-	</head>
-	<body>
-		<section id="container">
-			<% if (session[:user_id]!= nil) %>
-			<% user = User.find(session[:user_id]); %>
-			<header class="header white-bg">
+<head>
+  <title>FacePickers</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<section id="container">
+  <% if (session[:user_id]!= nil) %>
+      <% user = User.find(session[:user_id]); %>
+      <header class="header white-bg">
 
-				<div class="top-nav ">
-					<ul class="nav pull-right top-menu">
-						<!-- user login dropdown start-->
-						<li class="dropdown"style="padding-top: 8%">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#" > <img alt="" src="img/avatar1_small.jpg"> <span class="username"><%= user.name %></span> <b class="caret"></b> </a>
-							<ul class="dropdown-menu extended logout">
-								<div class="log-arrow-up"></div>
-								<li>
-									<%= link_to 'Apps <i class="fa fa-gamepad"></i>'.html_safe, apps_path, :class => 'btn' %>
-								</li>
-								<li>
-									<%= link_to 'Users <i class="fa fa-users"></i>'.html_safe, users_path, :class => "btn"%>
+        <div class="top-nav ">
+          <ul class="nav pull-right top-menu">
+            <!-- user login dropdown start-->
+            <li class="dropdown" style="padding-top: 8%">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <img alt="" src="assets/img/avatar1_small.jpg">
+                <span class="username"><%= user.name %></span> <b class="caret"></b> </a>
+              <ul class="dropdown-menu extended logout">
+                <div class="log-arrow-up"></div>
+                <li>
+                  <%= link_to 'Apps <i class="fa fa-gamepad"></i>'.html_safe, apps_path, :class => 'btn' %>
+                </li>
+                <li>
+                  <%= link_to 'Users <i class="fa fa-users"></i>'.html_safe, users_path, :class => "btn" %>
 
-								</li>
-								<li>
-									<%= link_to 'Logout <i class="fa fa-key"></i>'.html_safe, logout_path, method: :delete, :class => "btn" %>
-								</li>
-							</ul>
-						</li>
-						<!-- user login dropdown end -->
-					</ul>
-				</div>
+                </li>
+                <li>
+                  <%= link_to 'Logout <i class="fa fa-key"></i>'.html_safe, logout_path, method: :delete, :class => "btn" %>
+                </li>
+              </ul>
+            </li>
+            <!-- user login dropdown end -->
+          </ul>
+        </div>
 
-				<%= link_to "HOME", root_path, :class => 'logo' %>
-				<h1 class="text-center" >Wasappli Constant Picker</h1>
+        <%= link_to "HOME", root_path, :class => 'logo' %>
+        <h1 class="text-center">Wasappli Constant Picker</h1>
 
-			</header>
-			<% end %>
-			
-			<% if (session[:user_id]!= nil) %>
-			<aside>
-				<div id="sidebar" class="nav-collapse " tabindex="5000" style="overflow: hidden; outline: none;">
+      </header>
+  <% end %>
 
-					<!-- sidebar menu start-->
-					<ul class="sidebar-menu" id="nav-accordion">
+  <% if (session[:user_id]!= nil) %>
+      <aside>
+        <div id="sidebar" class="nav-collapse " tabindex="5000" style="overflow: hidden; outline: none;">
 
-						<!--multi level menu start-->
-						<li class="sub-menu dcjq-parent-li">
-							<a href="javascript:;" class="dcjq-parent"> <i class="fa fa-sitemap"></i> <span>Application List:</span> <span class="dcjq-icon"></span></a>
-							<ul class="sub" style="display: none;">
-								<!--Sub Menu start-->
-								<% user = User.find(session[:user_id]); %>
-								<% user.apps.each do |app| %>
-								<li class="sub-menu dcjq-parent-li">
-									<a href="boxed_page.html" class="dcjq-parent"><%= app.name %><span class="dcjq-icon"></span></a>
-									<ul class="sub" style="display: none;">
-										<li>
-											<%= link_to 'Modify Colors', couleurs_path(app.id) %>
-										</li>
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu" id="nav-accordion">
 
-										<li>
-											<%= link_to 'Modify Numbers', numbers_path(app.id) %>
-										</li>
+            <!--multi level menu start-->
+            <li class="sub-menu dcjq-parent-li">
+              <a href="javascript:;" class="dcjq-parent"> <i class="fa fa-sitemap"></i> <span>Application List:</span>
+                <span class="dcjq-icon"></span></a>
+              <ul class="sub" style="display: none;">
+                <!--Sub Menu start-->
+                <% user = User.find(session[:user_id]); %>
+                <% user.apps.each do |app| %>
+                    <li class="sub-menu dcjq-parent-li">
+                      <a href="boxed_page.html" class="dcjq-parent"><%= app.name %><span class="dcjq-icon"></span></a>
+                      <ul class="sub" style="display: none;">
+                        <li>
+                          <%= link_to 'Modify Colors', couleurs_path(:app_id => app.id) %>
+                        </li>
 
-										<li>
-											<%= link_to 'Modify Strings', at_strings_path(app.id) %>
-										</li>
+                        <li>
+                          <%= link_to 'Modify Numbers', numbers_path(:app_id => app.id) %>
+                        </li>
 
-										<li>
-											<%= link_to 'Launch Jenkins', start_jenkins_path(app.name) %>
-										</li>
+                        <li>
+                          <%= link_to 'Modify Strings', at_strings_path(:app_id => app.id) %>
+                        </li>
 
-									</ul>
-								</li>
-								<% end %>
-							</ul>
-						</li>
+                        <li>
+                          <%= link_to 'Modify Localizables', localizables_path(:app_id => app.id) %>
+                        </li>
 
-						<!--multi level menu end-->
-					</ul>
+                        <li>
+                          <%= link_to 'Launch Jenkins', start_jenkins_path(:name => app) %>
+                        </li>
 
-					<!-- sidebar menu end-->
-				</div>
+                      </ul>
+                    </li>
+                <% end %>
+              </ul>
+            </li>
 
-			</aside>
-			<% end %>
-			<%= yield %>
-		</section>
+            <!--multi level menu end-->
+          </ul>
 
-	</body>
+          <!-- sidebar menu end-->
+        </div>
+
+      </aside>
+  <% end %>
+  <%= yield %>
+</section>
+
+</body>
 </html>
