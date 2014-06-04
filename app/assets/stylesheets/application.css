@@ -21,3 +21,5 @@
 	margin-right: auto;
 }
 
+table.dataTable tr.missing { background-color: #ffc4c4; }
+

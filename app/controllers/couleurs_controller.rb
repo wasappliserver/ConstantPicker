@@ -31,7 +31,7 @@ class CouleursController < ApplicationController
     respond_to do |format|
       @couleur.value_coul=@couleur.value_coul.gsub("#", "0x")
       if @couleur.save
-        format.html { redirect_to couleurs_path(@couleur.app_id), notice: 'Couleur was successfully created.' }
+        format.html { redirect_to couleurs_path(:app_id => @couleur.app_id), notice: 'Couleur was successfully created.' }
         format.json { render :show, status: :created, location: @couleur }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class CouleursController < ApplicationController
       if @couleur.update(couleur_params)
         @couleur.value_coul = @couleur.value_coul.gsub("#", "0x")
         @couleur.save
-        format.html { redirect_to couleurs_path, notice: 'Couleur was successfully updated.' }
+        format.html { redirect_to couleurs_path(:app_id => @couleur.app_id), notice: 'Couleur was successfully updated.' }
         format.json { render :show, status: :ok, location: @couleur }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class CouleursController < ApplicationController
     app_id= @couleur.app_id
     @couleur.destroy
     respond_to do |format|
-      format.html { redirect_to couleurs_path(app_id) }
+      format.html { redirect_to couleurs_path(:app_id => app_id) }
       format.json { head :no_content }
     end
   end

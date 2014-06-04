@@ -14,7 +14,7 @@ a:hover {
 }
 
 .panel-heading {
-    border-color:#eff2f7 ;
+    border-color: #eff2f7;
     font-size: 16px;
     font-weight: 300;
 }
@@ -115,7 +115,6 @@ a:hover {
     color: #c2c2c2;
 }
 
-
 .form-control:focus, #focusedInput {
     border: 1px solid #517397;
     box-shadow: none;
@@ -211,7 +210,6 @@ ul {
     color: #FFFFFF;
 }
 
-
 .btn-white {
     box-shadow: none !important;
 }
@@ -228,22 +226,26 @@ ul {
 .btn-shadow.btn-default {
     box-shadow: 0 4px #9c9c9c;
 }
+
 .btn-shadow.btn-primary {
     box-shadow: 0 4px #29b392;
 }
+
 .btn-shadow.btn-success {
     box-shadow: 0 4px #61a642;
 }
+
 .btn-shadow.btn-info {
     box-shadow: 0 4px #1caadc;
 }
+
 .btn-shadow.btn-warning {
     box-shadow: 0 4px #cab03f;
 }
+
 .btn-shadow.btn-danger {
     box-shadow: 0 4px #d1595a;
 }
-
 
 /*dropdown shadow*/
 
@@ -273,7 +275,6 @@ ul {
     background-color: #fff;
 }
 
-
 /*tab*/
 
 .nav-tabs > li > a {
@@ -296,7 +297,7 @@ ul {
 }
 
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus,
-.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus{
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus {
     background-color: #61748d;
 }
 
@@ -324,6 +325,7 @@ ul {
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
     color: #000;
 }
+
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover {
     color: #fff;
 }

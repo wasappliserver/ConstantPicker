@@ -185,7 +185,6 @@ module ApplicationHelper
     return @lines_final
   end
 
-
   module_function :getStrings
 end
 

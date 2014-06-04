@@ -1,6 +1,5 @@
-<div class="depot_form">
-
-  <%= form_for(@user) do |f| %>
+<div class="panel-body">
+  <%= form_for @user, :html => {:class => 'form-horizontal'} do |f| %>
       <% if @user.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -14,30 +13,30 @@
       <% end %>
       <fieldset>
         <legend>Enter User Details</legend>
-        <div class="control-group">
-          <%= f.label :name, size: 40 %>
+        <div class="form-group">
+          <%= f.label :name, :class => 'control-label' %>
           <br>
-
           <div class="controls">
-            <%= f.text_field :name, :class => 'text_field' %>
+            <%= f.text_field :name, :class => 'form-control' %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label :password %>
-          <br>
 
+        <div class="form-group">
+          <%= f.label :password ,:class => 'control-label'%>
+          <br>
           <div class="controls">
-            <%= f.password_field :password, size: 40, :class => 'text_field' %>
+            <%= f.password_field :password, size: 40, :class => 'form-control' %>
           </div>
         </div>
-        <div class="control-group">
-          <%= f.label :password_confirmation %>
-          <br>
 
+        <div class="form-group">
+          <%= f.label :password_confirmation,:class => 'control-label' %>
+          <br>
           <div class="controls">
-            <%= f.password_field :password_confirmation, size: 40, :class => 'text_field' %>
+            <%= f.password_field :password_confirmation, size: 40, :class => 'form-control' %>
           </div>
         </div>
+
         <div class="form-actions">
           <%= f.submit nil, :class => 'btn btn-primary' %>
           <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

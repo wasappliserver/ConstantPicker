@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'hook' => 'hook_service#index'
+
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :localizables
+    end
+  end
+
   resources :localizables
-  
+
   get 'admin' => 'menu#home'
   get 'start_jenkins' => 'menu#start_jenkins'
   get 'start_jenkins_text' => 'menu#start_jenkins_text.text'

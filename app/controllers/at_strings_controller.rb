@@ -34,7 +34,7 @@ class AtStringsController < ApplicationController
 
     respond_to do |format|
       if @at_string.save
-        format.html { redirect_to at_strings_path(@at_string.app_id), notice: 'At string was successfully created.' }
+        format.html { redirect_to at_strings_path(:app_id => @at_string.app_id), notice: 'At string was successfully created.' }
         format.json { render :show, status: :created, location: @at_string }
       else
         format.html { render :new }
@@ -46,7 +46,6 @@ class AtStringsController < ApplicationController
   # PATCH/PUT /at_strings/1
   # PATCH/PUT /at_strings/1.json
   def update
-    puts params.to_s
     session[:app_id]=params[:at_string][:app_id]
     respond_to do |format|
       if @at_string.update(at_string_params)
@@ -55,7 +54,7 @@ class AtStringsController < ApplicationController
         @at_string.value = value_tmp[0]
         @at_string.save
 
-        format.html { redirect_to at_strings_path, notice: 'At string was successfully updated.' }
+        format.html { redirect_to at_strings_path(:app_id => @at_string.app_id), notice: 'At string was successfully updated.' }
         format.json { render :show, status: :ok, location: @at_string }
       else
         format.html { render :edit }
@@ -70,7 +69,7 @@ class AtStringsController < ApplicationController
     app_id = @at_string.app_id
     @at_string.destroy
     respond_to do |format|
-      format.html { redirect_to at_strings_path(app_id)}
+      format.html { redirect_to at_strings_path(:app_id => app_id)}
       format.json { head :no_content }
     end
   end

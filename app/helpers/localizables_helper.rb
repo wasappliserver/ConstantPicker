@@ -1,4 +1,6 @@
 require 'find'
+require_relative 'pre_build'
+
 module LocalizablesHelper
 
   def getLang id
@@ -34,7 +36,7 @@ module LocalizablesHelper
     lines_tab = getLocalizables lang
     #puts "liens " + lines_tab.to_s
 
-    if (lines_tab == "No File Found")
+    if (lines_tab == "No File Found" || lines_tab == 0)
       puts "skipped no localizable.strings found"
     else
       lines_tab.each do |line|
@@ -52,7 +54,6 @@ module LocalizablesHelper
   module_function :addLangs
 
   def getLocalizables lang
-    puts "LANG IS ===>" + lang.to_s
     line_tab = Array.new
 
     path_loc = "#{@path}/#{lang}.lproj/Localizable.strings"
@@ -74,5 +75,72 @@ module LocalizablesHelper
   end
 
   module_function :getLocalizables
+
+  def getStrings app_name
+
+    #gets all the values from the DB for localization, stores them in array
+    app = App.find_by name: app_name
+
+    @path ="/Users/wasappliserver/.jenkins/jobs/#{app_name}/workspace/#{app_name}"
+    @lang_tab = Array.new
+
+    @lines_tab = Hash.new
+
+    if (File.exist?(@path))
+      Find.find(@path) do |path|
+        if (path =~ /.*\.lproj$/)
+          @lang_tab << path
+        end
+      end
+    end
+
+    for i in 0..@lang_tab.length-1
+      el = @lang_tab[i][/(\w+).lproj$/]
+      el2 = el[/^(\w+)/]
+      lang = el2
+      puts "LANG IS ===>" + lang.to_s
+      @lines_tab["#{lang}"] = Array.new
+
+      #get the list of the variables in the file
+      @lines_tab["#{lang}"] = getLocalizables lang
+      # puts "LANNNNG " + @lines_tab["#{lang}"].to_s
+      if (@lines_tab["#{lang}"] == "No File Found")
+        puts "skipped no localizable.strings found"
+      else
+        #update the file
+        @row_localizable = Localizable.where("app_id = '#{app.id}' and lang = '#{lang}'")
+        @row_localizable.each do |row|
+
+          if (compareLinesL(row, lang) == false)
+            addRowLocalizable row, lang
+          end
+        end
+      end
+    end
+
+    return @lines_tab
+
+  end
+
+  module_function :getStrings
+
+  def get_all_langs app_name
+    path ="/Users/wasappliserver/.jenkins/jobs/#{app_name}/workspace/#{app_name}"
+    lang_tab = Array.new
+
+    if (File.exist?(path))
+      Find.find(path) do |p|
+        if (p =~ /.*\.lproj$/)
+          el = p[/(\w+).lproj$/]
+          el2 =el[/^(\w+)/]
+          lang_tab << el2
+        end
+      end
+    end
+
+    return lang_tab
+  end
+
+  module_function :get_all_langs
 
 end

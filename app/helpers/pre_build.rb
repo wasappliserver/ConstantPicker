@@ -95,10 +95,10 @@ def compareOneLineC i, row, patt_type
 
     if (data[0][0]==row.title)
       # puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
-     #puts "LINE BEFORE" + @lines_final[i].to_s
+      #puts "LINE BEFORE" + @lines_final[i].to_s
       @lines_final[i] = "#define #{row.title} [UIColor colorWithHexa:#{row.value_coul}]\n"
-     #puts "LINE AFTER" + @lines_final[i].to_s
-     #puts
+      #puts "LINE AFTER" + @lines_final[i].to_s
+      #puts
       return true
     end
   elsif (patt_type ==2)
@@ -108,7 +108,7 @@ def compareOneLineC i, row, patt_type
     if (data[0][1]==row.title)
       # puts "MATCH " #NUMBER data|||row ===>" + data[0][1].to_s + "|||" +row[0].to_s
       # puts "LINE BEFORE" + @lines_final[i].to_s
-       @lines_final[i] = "#define #{row.title} #{row.value_coul}\n"
+      @lines_final[i] = "#define #{row.title} #{row.value_coul}\n"
       # puts "LINE AFTER" + @lines_final[i].to_s
       #puts
       return true
@@ -118,6 +118,33 @@ def compareOneLineC i, row, patt_type
 end
 
 ####################################
+
+########## L O C A LI Z A T I O N S ##############
+def compareLinesL(row, lang)
+
+  #puts "ROW ==> #{row[0]}"
+  for i in 0..@lines_tab["#{lang}"].size-1
+    #puts "row ||| line ==> #{row.key_loc} ||| #{@lines_tab["#{lang}"][i][0]}"
+    if (@lines_tab["#{lang}"][i][0] == row.key_loc)
+      return true
+    end
+  end
+  return false
+
+end
+
+##############################################################################
+
+########## A D D  R O W  L O C A LI Z A T I O N ##############
+def addRowLocalizable row, lang
+
+  puts " ADD ROOOWWW"
+
+  @lines_tab["#{lang}"] << "\"#{row.key_loc}\" = \"#{row.value}\"\n"
+
+end
+
+######################################
 
 ########## A D D  R O W  N U M B E R ##############
 def addRowNumber row

@@ -2072,7 +2072,6 @@
 		function _fnFeatureHtmlFilter ( oSettings )
 		{
 			var oPreviousSearch = oSettings.oPreviousSearch;
-			
 			var sSearchStr = oSettings.oLanguage.sSearch;
 			sSearchStr = (sSearchStr.indexOf('_INPUT_') !== -1) ?
 			  sSearchStr.replace('_INPUT_', '<input type="text"class="form-control" />') :

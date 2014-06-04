@@ -31,7 +31,7 @@ class NumbersController < ApplicationController
     @number.app_id = params[:number][:app_id]
     respond_to do |format|
       if @number.save
-        format.html { redirect_to numbers_path(@number.app_id), notice: 'Number was successfully created.' }
+        format.html { redirect_to numbers_path(:app_id => @number.app_id), notice: 'Number was successfully created.' }
         format.json { render :show, status: :created, location: @number }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class NumbersController < ApplicationController
     session[:app_id]=params[:number][:app_id]
     respond_to do |format|
       if @number.update(number_params)
-        format.html { redirect_to numbers_path, notice: 'Number was successfully updated.' }
+        format.html { redirect_to numbers_path(:app_id => @number.app_id), notice: 'Number was successfully updated.' }
         format.json { render :show, status: :ok, location: @number }
       else
         format.html { render :edit }
@@ -61,7 +61,7 @@ class NumbersController < ApplicationController
     app_id = @number.app_id
     @number.destroy
     respond_to do |format|
-      format.html { redirect_to numbers_path(app_id) }
+      format.html { redirect_to numbers_path(:app_id => app_id) }
       format.json { head :no_content }
     end
   end

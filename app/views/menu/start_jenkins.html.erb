@@ -1,14 +1,59 @@
 <br>
 <br>
-<section class="wrapper" id="main-content">
-	<%= link_to 'Go Back', root_path, :class => "btn btn-big btn-primary" %>
-	<br>
-	<br>
-	<pre style="font-size: 10px">
-  <% lines_final = ApplicationHelper.getStrings(params[:name]) %>
-  <% lines_final.each do |line| %>
-    <%= line.to_s %>
-<% end %>
-</pre>
+<section class="wrapper" id="main-content" style="width: 85%">
+  <%= link_to 'Go Back', root_path, :class => "btn btn-big btn-primary" %>
+  <br>
+  <br>
+
+  <section class="panel">
+    <header class="panel-heading tab-bg-dark-navy-blue ">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a data-toggle="tab" href="#Constants">Constants.h</a>
+        </li>
+        <% @langs = LocalizablesHelper.get_all_langs params[:name]
+           @langs.each do |lang| %>
+            <li class="">
+              <%= link_to "#{lang}", "##{lang}", :data => {:toggle => "tab"} %>
+            </li>
+        <% end %>
+      </ul>
+    </header>
+    <div class="panel-body">
+      <div class="tab-content">
+        <div id="Constants" class="tab-pane active">
+          <pre style="font-size: 11px">
+            <% lines_final = ApplicationHelper.getStrings(params[:name]) %>
+            <% lines_final.each do |line| %>
+             <%= line.to_s %>
+            <% end %>
+          </pre>
+        </div>
+        <% @langs.each do |lang| %>
+            <div id="<%= lang %>" class="tab-pane">
+               <pre style="font-size: 11px">
+
+          <% @lines_tab= Hash.new
+             @lines_tab = LocalizablesHelper.getStrings(params[:name]) %>
+                 <% if @lines_tab["#{lang}"] == "" %>
+                 <%= "Pas de fichier Localization.string dans le repertoire" %>
+                     <% else %>
+                 <% @lines_tab["#{lang}"].each do |array| %>
+                <% if array.instance_of?(Array) %>
+                     <%= "\"#{array[0]}\" = \"#{array[1]}\"" %>
+                <% else %>
+                    <%= array.to_s %>
+                <% end %>
+            <% end %>
+                     <% end %>
+                </pre>
+            </div>
+        <% end %>
+
+
+      </div>
+    </div>
+  </section>
+
 
 </section>
