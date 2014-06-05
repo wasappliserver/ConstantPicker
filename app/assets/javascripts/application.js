@@ -44,3 +44,4 @@ $(document).on('page:load', tablesort);
 $(document).ready(function () {
     $('#example').dataTable();
 });
+

@@ -33,12 +33,17 @@
             <tbody role="alert" aria-live="polite" aria-relevant="all">
             <% @app.localizables.each do |localizable| %>
                 <% if localizable.missing == true
+                     LocalizablesHelper.findNotMissing localizable
+                   end %>
+            <% end %>
+            <% @app.localizables.each do |localizable| %>
+                <% if localizable.missing == true
                      missing = "missing"
                    else
                      missing=""
                    end %>
 
-                <tr class="<%="#{missing}"%>">
+                <tr class="<%= "#{missing}" %>">
                   <td><%= localizable.key_loc %></td>
                   <td><%= localizable.value %></td>
                   <td><%= localizable.lang %></td>

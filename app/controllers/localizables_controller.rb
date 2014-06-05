@@ -29,17 +29,11 @@ class LocalizablesController < ApplicationController
   # POST /localizables.json
   def create
     @localizable = Localizable.new(localizable_params)
-    # if (session[:user_id]==nil)
-    #   if (params.has_key?(token))
-    #     token = params[:token]
-    #     app = App.where("token = #{token} ")
-    #     @localizable.app = app
-    #     puts @localizable.app_id
-    #   end
-    # else
-      @localizable.app_id = params[:localizable][:app_id]
-    # end
+    @localizable.app_id = params[:localizable][:app_id]
 
+    #by default missing has to be true, then it changes when rendering the table
+    @localizable.missing = true
+    
     respond_to do |format|
       if @localizable.save
         format.html { redirect_to localizables_path(:app_id => @localizable.app_id), notice: 'Localizable was successfully created.' }
@@ -55,6 +49,10 @@ class LocalizablesController < ApplicationController
   # PATCH/PUT /localizables/1.json
   def update
     session[:app_id]=params[:localizable][:app_id]
+
+    #by default missing has to be true, then it changes when rendering the table
+    @localizable.missing = true
+
     respond_to do |format|
       if @localizable.update(localizable_params)
         format.html { redirect_to localizables_path(:app_id => @localizable.app_id), notice: 'Localizable was successfully updated.' }

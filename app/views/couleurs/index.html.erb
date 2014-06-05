@@ -34,7 +34,14 @@
                 <tr>
                   <td><%= couleur.title %></td>
                   <td><%= couleur.coul_type %></td>
-                  <td><%= couleur.value_coul %> </td>
+                  <td>
+                    <div id="circle">
+                      <%= couleur.value_coul %>
+                      <svg xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="13" cy="13" r="13" fill="<%=CouleursHelper.value_coul_to_minicolor(couleur.value_coul)%>"/>
+                      </svg>
+                    </div>
+                  </td>
                   <td> <%= link_to t('.edit', :default => t("helpers.links.edit")),
                                    edit_couleur_path(couleur), :class => 'btn btn-mini' %>
                     <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -46,6 +53,7 @@
             <% end %>
             </tbody>
           </table>
+
         </div>
       </div>
     </div>

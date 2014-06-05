@@ -143,4 +143,30 @@ module LocalizablesHelper
 
   module_function :get_all_langs
 
+  def findNotMissing localizable
+
+    puts "for #{localizable.lang}BOOLEAN +> " + localizable.missing.to_s
+    #search if another row in the DB has the same key_loc
+    loc_row = Localizable.where("key_loc = '#{localizable.key_loc}'")
+    #if yes, we check if there are as many lang as key_loc,
+    count_rows = loc_row.length
+    puts "nombres de rows #{count_rows}"
+
+    if (count_rows > 0)
+      app = App.find(localizable.app_id)
+      lang_tab = get_all_langs app.name
+
+      puts "nombres de langues #{lang_tab.size}"
+
+      # if yes that means value is translated into all languages
+      if (lang_tab.length == count_rows)
+        localizable.missing = false
+        puts "BOOLEAN IS NOW"+localizable.missing.to_s
+        localizable.save
+      end
+    end
+
+  end
+
+  module_function :findNotMissing
 end
