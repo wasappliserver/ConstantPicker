@@ -76,7 +76,7 @@ class CouleursController < ApplicationController
 
 # Never trust parameters from the scary internet, only allow the white list through.
   def couleur_params
-    params.require(:couleur).permit(:title, :coul_type, :value_coul, :app_id)
+    params.require(:couleur).permit(:title, :coul_type, :value_coul, :app_id, :edit_flag)
   end
 
 end

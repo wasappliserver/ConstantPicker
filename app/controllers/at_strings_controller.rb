@@ -69,7 +69,7 @@ class AtStringsController < ApplicationController
     app_id = @at_string.app_id
     @at_string.destroy
     respond_to do |format|
-      format.html { redirect_to at_strings_path(:app_id => app_id)}
+      format.html { redirect_to at_strings_path(:app_id => app_id) }
       format.json { head :no_content }
     end
   end
@@ -82,6 +82,6 @@ class AtStringsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def at_string_params
-    params.require(:at_string).permit(:title, :value, :app_id)
+    params.require(:at_string).permit(:title, :value, :app_id, :edit_flag)
   end
 end

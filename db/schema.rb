@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140604151317) do
+ActiveRecord::Schema.define(version: 20140609203739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20140604151317) do
     t.integer  "app_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "edit_flag"
   end
 
   create_table "couleurs", force: true do |t|
@@ -43,11 +44,12 @@ ActiveRecord::Schema.define(version: 20140604151317) do
     t.integer  "app_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "edit_flag"
   end
 
   create_table "localizables", force: true do |t|
     t.string   "key_loc"
-    t.string   "value"
+    t.text     "value"
     t.string   "lang"
     t.integer  "app_id"
     t.boolean  "missing",    default: false
@@ -61,6 +63,7 @@ ActiveRecord::Schema.define(version: 20140604151317) do
     t.integer  "app_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "edit_flag"
   end
 
   create_table "users", force: true do |t|

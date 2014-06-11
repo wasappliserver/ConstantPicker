@@ -1,7 +1,11 @@
 <br>
 <br>
 <section class="wrapper" id="main-content" style="width: 85%">
+
+  <%= render partial: "flash_messages", flash: flash %>
+
   <%= link_to 'Go Back', root_path, :class => "btn btn-big btn-primary" %>
+  <%= link_to 'Trigger Build', trigger_build_path(:name => params[:name]), :class => "btn btn-big btn-primary" %>
   <br>
   <br>
 
@@ -24,33 +28,34 @@
         <div id="Constants" class="tab-pane active">
           <pre style="font-size: 11px">
             <% lines_final = ApplicationHelper.getStrings(params[:name]) %>
-            <% lines_final.each do |line| %>
-             <%= line.to_s %>
+            <% if lines_final!= nil || lines_final.size != 0 %>
+                <% lines_final.each do |line| %>
+                <%= line.to_s %>
+                <% end %>
+            <% else %>
+                <%= "Pas de fichier Constants.h pour ce projet" %>
             <% end %>
           </pre>
         </div>
         <% @langs.each do |lang| %>
             <div id="<%= lang %>" class="tab-pane">
                <pre style="font-size: 11px">
-
-          <% @lines_tab= Hash.new
-             @lines_tab = LocalizablesHelper.getStrings(params[:name]) %>
-                 <% if @lines_tab["#{lang}"] == "" %>
-                 <%= "Pas de fichier Localization.string dans le repertoire" %>
-                     <% else %>
-                 <% @lines_tab["#{lang}"].each do |array| %>
-                <% if array.instance_of?(Array) %>
-                     <%= "\"#{array[0]}\" = \"#{array[1]}\"" %>
-                <% else %>
-                    <%= array.to_s %>
-                <% end %>
-            <% end %>
-                     <% end %>
+                 <% @lines_tab= Hash.new
+                    @lines_tab = LocalizablesHelper.writeLocs(params[:name]) %>
+                 <% if @lines_tab["#{lang}"] == nil %>
+                    <%= "Pas de fichier Localization.string dans le repertoire" %>
+                 <% else
+                      @lines_tab["#{lang}"].each do |array|
+                        if array.instance_of?(Array) %>
+                            <%= "\"#{array[0]}\" = \"#{array[1]}\"" %>
+                        <% else %>
+                            <%= array.to_s %>
+                        <% end %>
+                    <% end %>
+                 <% end %>
                 </pre>
             </div>
         <% end %>
-
-
       </div>
     </div>
   </section>

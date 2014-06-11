@@ -25,6 +25,17 @@
           <%= f.text_field :value, :class => 'form-control' %>
         </div>
       </div>
+
+      <div class="form-group">
+        <div class="btn btn-warning btn-xs">
+          <label class="btn btn-warning btn-sm" data-toogle="buttons">
+            <%= f.check_box :edit_flag %>Press Here if someone needs to edit this key
+          </label>
+
+          <div id="Inline"></div>
+        </div>
+      </div>
+
       <% if (params[:app_id]!=nil)
            app_id = params[:app_id]
          else

@@ -5,6 +5,7 @@ module ApplicationHelper
   @define_tab = []
 
   def readHeader id
+
     @define_tab = nil
     @define_tab = []
     app_name = App.find(id).name
@@ -95,8 +96,8 @@ module ApplicationHelper
 
   def isString str, id
     #isColor?
-    if str =~ /(\S*)\s(\S*)\s*(@"\S*")/
-      tab = str.scan(/(\S*)\s(\S*)\s*(@"\S*")/m)
+    if str =~ /^(\S*)\s(\S*)\s*(@"\S*")/
+      tab = str.scan(/^(\S*)\s(\S*)\s*(@"\S*")/m)
       #array of array, access the content from the second table index
       #verification duplicate
       query = AtString.where(:title => tab[0][1], :app_id => id)
@@ -138,39 +139,38 @@ module ApplicationHelper
 
     path="/Users/wasappliserver/.jenkins/jobs/#{app.name}/workspace/#{app.name}/Constants.h"
 
-#If the file exist
+    #If the file exist
     if (File.exist?(path))
-#open it
+      #open it
       File.open(path, 'r+') do |file|
-#read lines, fill the tabs
+        #read lines, fill the tabs
         @lines_init = file.readlines
         @lines_final = @lines_init.dup
 
-
+        #we compare numbers of the DB to the file
         @rows_number.each do |row|
-
-
+          #if a row match a line in the file, we skip, if not, we write the new line in the file
           if (compareLinesN(row)== false)
-            #ADD THE ROWWWW
-            #puts "ADD NEW ROW NUMBER"
+            #ADD THE ROW
+            puts "ADD NEW ROW NUMBER"
             addRowNumber row
           end
         end
 
         @rows_color.each do |row|
-          puts "ROW ==>" + row.title + row.value_coul+ row.coul_type.to_s
-
+          #if a row match a line in the file, we skip, if not, we write the new line in the file
           if (compareLinesC(row)== false)
-            #ADD THE ROWWWW
-            #puts "ADD NEW ROW COLOR"
+            #ADD THE ROW
+            puts "ADD NEW ROW COLOR"
             addRowColor row
           end
         end
 
         @rows_string.each do |row|
+          #if a row match a line in the file, we skip, if not, we write the new line in the file
           if (compareLinesS(row)== false)
-            #ADD THE ROWWWW
-            #puts "ADD NEW ROW String"
+            #ADD THE ROW
+            puts "ADD NEW ROW String"
             addRowString row
           end
         end
@@ -179,12 +179,30 @@ module ApplicationHelper
 
     else
       puts "FILE DOES NOT EXIST in #{path}"
-
+      @lines_final = nil
     end
 
     return @lines_final
   end
 
   module_function :getStrings
+
+  def bootstrap_class_for(flash_type)
+    case flash_type
+      when "success"
+        "alert-success" # Green
+      when "error"
+        "alert-danger" # Red
+      when "alert"
+        "alert-warning" # Yellow
+      when "notice"
+        "alert-info" # Blue
+      else
+        flash_type.to_s
+    end
+  end
+
+  module_function :bootstrap_class_for
+
 end
 

@@ -2,7 +2,7 @@ def init
   @rows_color= Array.new
   @rows_string = Array.new
   @rows_number = Array.new
-
+  @lines_final = nil
 end
 
 #################################################################
@@ -138,8 +138,7 @@ end
 ########## A D D  R O W  L O C A LI Z A T I O N ##############
 def addRowLocalizable row, lang
 
-  puts " ADD ROOOWWW"
-
+  #puts " ADD ROOOWWW"
   @lines_tab["#{lang}"] << "\"#{row.key_loc}\" = \"#{row.value}\"\n"
 
 end

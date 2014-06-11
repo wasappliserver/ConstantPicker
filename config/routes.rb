@@ -1,18 +1,20 @@
 Rails.application.routes.draw do
 
-  get 'hook' => 'hook_service#index'
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       resources :localizables
+      resources :jenkins
     end
   end
+
+  get 'jenkins' => 'jenkins#index'
 
   resources :localizables
 
   get 'admin' => 'menu#home'
   get 'start_jenkins' => 'menu#start_jenkins'
-  get 'start_jenkins_text' => 'menu#start_jenkins_text.text'
+  get 'trigger_build' => 'menu#trigger_build'
 
   controller :sessions do
     post 'login' => :create

@@ -9,6 +9,8 @@ module LocalizablesHelper
     @path ="/Users/wasappliserver/.jenkins/jobs/#{app_name}/workspace/#{app_name}"
     @lang_tab = Array.new
 
+    @lines_tab = Hash.new
+
     if (File.exist?(@path))
       Find.find(@path) do |path|
         if (path =~ /.*\.lproj$/)
@@ -16,15 +18,38 @@ module LocalizablesHelper
         end
       end
     end
+
     puts "TABLEAU DES LANGUES "+ @lang_tab.to_s
 
-    @lang_tab.each do |lang|
-      el = lang[/(\w+).lproj$/]
+    #for each lang
+    for i in 0..@lang_tab.length-1
+      el = @lang_tab[i][/(\w+).lproj$/]
       el2 = el[/^(\w+)/]
       lang = el2
-
-      #main function which writes the new key/value string
+      puts "LANG IS ===>" + lang.to_s
+      # first we add the lang in th DB
       addLangs lang
+      @lines_tab["#{lang}"] = Array.new
+
+      #get the list of the variables in the file
+      @lines_tab["#{lang}"] = getLocalizables lang
+      #puts "LANNNNG " + @lines_tab["#{lang}"].to_s
+      if (@lines_tab["#{lang}"] == "No File Found")
+        puts "skipped no localizable.strings found"
+        @lines_tab["#{lang}"]= nil
+      else
+        @lines_tab["#{lang}"].each do |line|
+          #if we already have the row in the DB
+          puts line[0]
+          query = Localizable.where("app_id = '#{@app_id}' and key_loc = '#{line[0]}' and lang = '#{lang}'")
+          if query.count != 0
+            #puts 'this entry is already in the database'
+          else
+            Localizable.create!(key_loc: line[0], value: line[1], lang: lang, app_id: @app_id)
+          end
+        end
+
+      end
     end
   end
 
@@ -64,7 +89,7 @@ module LocalizablesHelper
         #read files, stores it in an table
         @lines = file.read
 
-        lines_tab = @lines.scan(/\s*\"(.*)\"\s*=\s*\"([\S\s]*?)\"\s*/)
+        lines_tab = @lines.scan(/\s*\"(.*)\"\s*=\s*\"([\S\s]*?)\"\s*;/)
         #puts lines_tab
         return lines_tab
       end
@@ -76,7 +101,7 @@ module LocalizablesHelper
 
   module_function :getLocalizables
 
-  def getStrings app_name
+  def writeLocs app_name
 
     #gets all the values from the DB for localization, stores them in array
     app = App.find_by name: app_name
@@ -103,11 +128,12 @@ module LocalizablesHelper
 
       #get the list of the variables in the file
       @lines_tab["#{lang}"] = getLocalizables lang
-      # puts "LANNNNG " + @lines_tab["#{lang}"].to_s
+      puts "LANNNNG " + @lines_tab["#{lang}"].to_s
       if (@lines_tab["#{lang}"] == "No File Found")
         puts "skipped no localizable.strings found"
+        @lines_tab["#{lang}"]= nil
       else
-        #update the file
+        #update the DB
         @row_localizable = Localizable.where("app_id = '#{app.id}' and lang = '#{lang}'")
         @row_localizable.each do |row|
 
@@ -115,6 +141,7 @@ module LocalizablesHelper
             addRowLocalizable row, lang
           end
         end
+
       end
     end
 
@@ -122,7 +149,7 @@ module LocalizablesHelper
 
   end
 
-  module_function :getStrings
+  module_function :writeLocs
 
   def get_all_langs app_name
     path ="/Users/wasappliserver/.jenkins/jobs/#{app_name}/workspace/#{app_name}"

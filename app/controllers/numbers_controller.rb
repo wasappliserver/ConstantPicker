@@ -74,7 +74,7 @@ class NumbersController < ApplicationController
 
 # Never trust parameters from the scary internet, only allow the white list through.
   def number_params
-    params.require(:number).permit(:title, :value, :app_id)
+    params.require(:number).permit(:title, :value, :app_id, :edit_flag)
   end
 
 end

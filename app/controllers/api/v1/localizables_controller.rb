@@ -6,7 +6,9 @@ module Api
       respond_to :json
 
       def index
-        respond_with Localizable.all
+        app = App.where("name = '#{params[:name]}'")
+        loc = Localizable.where("app_id = #{app[0].id}")
+        respond_with loc
       end
 
       def show
@@ -14,7 +16,6 @@ module Api
       end
 
       def create
-
         #compute the token into app_id
         app = App.where(:app_token => params[:app_token])
         if (app.size!=0)

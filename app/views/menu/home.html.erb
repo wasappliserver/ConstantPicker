@@ -1,10 +1,14 @@
+<%= render partial: "flash_messages", flash: flash %>
+
 <% if (session[:user_id]!= nil) %>
-<%= render :partial => "menu/home_logged" %>
+    <%= render :partial => "menu/home_logged" %>
 <% end %>
 
 <% if (session[:user_id]== nil) %>
-<div class="container">
-	<%= render :partial => "sessions/new" %>
-</div>
+    <div class="container">
+      <%= render :partial => "sessions/new" %>
+    </div>
 <% end %>
+
+
 
