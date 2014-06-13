@@ -20,6 +20,12 @@
 //= require DT_bootstrap
 //= require jquery.dataTables
 
+
+/*
+ *******************************
+ MINICOLOR INTIALIZER****
+ *******************************
+ */
 var minicolor;
 minicolor = function () {
 
@@ -33,6 +39,11 @@ minicolor = function () {
 $(document).ready(minicolor);
 $(document).on('page:load', minicolor);
 
+/*
+ *******************************
+ TABLE INTIALIZER****
+ *******************************
+ */
 var tablesort;
 tablesort = function () {
     $("#myTable").tablesorter();
@@ -44,6 +55,16 @@ $(document).on('page:load', tablesort);
 $(document).ready(function () {
     $('#example').dataTable();
 });
+
+/*
+ *******************************
+ Color Theme Selection      ****
+ *******************************
+ */
+function setColorTheme(color) {
+    $("#minicolor").val(color);
+    $('#minicolor').minicolors('value', color);
+};
 
 
 

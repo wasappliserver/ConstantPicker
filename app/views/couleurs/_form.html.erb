@@ -13,25 +13,35 @@
             </ul>
           </div>
       <% end %>
+
       <div class="form-group">
         <%= f.label :title, :class => 'control-label' %>
         <div class="controls">
           <%= f.text_field :title, :class => 'form-control' %>
         </div>
       </div>
+      <br>
+      <label style="font-size: 13px">Type a color. Or click on the left square</label>
 
       <div class="form-group">
-        <%= f.label :value_coul, :class => 'control-label' %>
+        <%= f.label 'Color', :class => 'control-label' %>
         <div class="controls">
           <%= f.text_field :value_coul, :class => 'form-control', :id => 'minicolor', :data_defaultValue => "#{CouleursHelper.value_coul_to_minicolor(@couleur.value_coul)}" %>
-          <div id="Inline"></div>
+          <br>
+          <br>
+          <a class="btn btn-success" data-toggle="modal" href="#myModal">
+            Set of colors for this app
+          </a>
         </div>
       </div>
+      <div id="Inline"></div>
+      </div>
+
 
       <div class="form-group">
         <div class="btn btn-warning btn-xs">
           <label class="btn btn-warning btn-sm" data-toogle="buttons">
-            <%= f.check_box :edit_flag %>Press Here if someone needs to edit this key
+            <%= f.check_box :edit_flag %>Press Here if someone needs to edit this key<br>
           </label>
 
           <div id="Inline"></div>
@@ -50,4 +60,37 @@
                     couleurs_path(:app_id => app_id), :class => 'btn' %>
       </div>
   <% end %>
-</div>
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Modal Tittle</h4>
+        </div>
+        <div class="modal-body">
+          <% data = ThemeColor.where("app_id = '#{@couleur.app_id}'") %>
+          <% for i in 0..data.length-1
+               puts data[i].name.to_s %>
+              <% if (data[i].name.blank? == true)
+                   color_name = "No Name"
+                 else
+                   color_name = data[i].name
+                 end %>
+              <button type="button" class="btn btn-lg btn-modal" onclick="setColorTheme('<%= "#{data[i].color.gsub(/0x/, "#")}"%>')" style="background-color: <%= "#{data[i].color.gsub(/0x/, "#")}" %>">
+                <%= "#{color_name}" %>
+              </button>
+              <% if (i+1%4 == 0) %>
+                  <br/>
+              <% end %>
+              &nbsp;
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+          <button class="btn btn-success" type="button">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

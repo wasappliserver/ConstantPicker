@@ -1,4 +1,4 @@
-<%- model_class = AtString -%>
+<% model_class = ThemeColor %>
 <% %>
 <section class="wrapper" id="main-content">
   <br>
@@ -17,36 +17,37 @@
             <thead>
             <tr role="row">
               <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="0" colspan="0" aria-label="Colors: activate to sort column ascending" style="width: 360px;">Name</th>
-              <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="0" colspan="0" aria-label="Numbers: activate to sort column ascending" style="width: 360px;">Value</th>
+              <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="0" colspan="0" aria-label="Colors: activate to sort column ascending" style="width: 360px;">Color
+                preview
+              </th>
               <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="0" colspan="0" aria-label="Action: activate to sort column ascending" style="width: 360px;"><%= t '.actions', :default => t("helpers.actions") %></th>
             </tr>
             </thead>
             <tfoot>
             <tr>
               <th rowspan="0" colspan="0">Name</th>
-              <th rowspan="0" colspan="0">Value</th>
+              <th rowspan="0" colspan="0">Color Preview</th>
               <th rowspan="0" colspan="0">Action</th>
             </tr>
             </tfoot>
+
             <tbody role="alert" aria-live="polite" aria-relevant="all">
-            <% @app.at_strings.each do |at_string| %>
-                <% if at_string.edit_flag== true
-                     classflag = "missing"
-                   else
-                     classflag=""
-                   end %>
-                <tr class="<%= classflag %>">
-                  <td><%= at_string.title %></td>
-                  <td><%= at_string.value %></td>
+            <% @app.theme_colors.each do |theme_color| %>
+
+                <tr>
+                  <td><%= theme_color.name %> (<%= theme_color.color %>)</td>
                   <td>
-                    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                                edit_at_string_path(at_string), :class => 'btn btn-mini' %>
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="13" cy="13" r="13" fill="<%= CouleursHelper.value_coul_to_minicolor(theme_color.color) %>"/>
+                    </svg>
+                  </td>
+                  <td> <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                                   edit_theme_color_path(theme_color), :class => 'btn btn-mini' %>
                     <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                                at_string_path(at_string),
+                                theme_color_path(theme_color),
                                 :method => :delete,
                                 :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                                :class => 'btn btn-mini btn-danger' %>
-                  </td>
+                                :class => 'btn btn-mini btn-danger' %> </td>
                 </tr>
             <% end %>
             </tbody>
@@ -58,6 +59,6 @@
     </div>
 
   </section>
-  <%= link_to 'New String', new_at_string_path(:app_id => @app.id), :class => 'btn btn-info' %>
+  <%= link_to 'New Number', new_theme_color_path(:app_id => @app.id), :class => 'btn btn-info' %>
   <%= link_to "Back to menu", root_path, :class => 'btn btn-secondary' %>
 </section>

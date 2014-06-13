@@ -31,14 +31,20 @@
             </tfoot>
             <tbody role="alert" aria-live="polite" aria-relevant="all">
             <% @app.couleurs.each do |couleur| %>
-                <tr>
+                <% couleur.app_id = @app.id %>
+                <% if couleur.edit_flag== true
+                     classflag = "missing"
+                   else
+                     classflag=""
+                   end %>
+                <tr class="<%= classflag %>">
                   <td><%= couleur.title %></td>
                   <td><%= couleur.coul_type %></td>
                   <td>
                     <div id="circle">
                       <%= couleur.value_coul %>
                       <svg xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="13" cy="13" r="13" fill="<%=CouleursHelper.value_coul_to_minicolor(couleur.value_coul)%>"/>
+                        <circle cx="13" cy="13" r="13" fill="<%= CouleursHelper.value_coul_to_minicolor(couleur.value_coul) %>"/>
                       </svg>
                     </div>
                   </td>

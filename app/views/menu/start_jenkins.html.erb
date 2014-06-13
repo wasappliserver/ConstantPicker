@@ -5,7 +5,7 @@
   <%= render partial: "flash_messages", flash: flash %>
 
   <%= link_to 'Go Back', root_path, :class => "btn btn-big btn-primary" %>
-  <%= link_to 'Trigger Build', trigger_build_path(:name => params[:name]), :class => "btn btn-big btn-primary" %>
+  <%= link_to 'Trigger Build/ Deploy', trigger_build_path(:name => params[:name]), :class => "btn btn-big btn-primary" %>
   <br>
   <br>
 
@@ -28,7 +28,7 @@
         <div id="Constants" class="tab-pane active">
           <pre style="font-size: 11px">
             <% lines_final = ApplicationHelper.getStrings(params[:name]) %>
-            <% if lines_final!= nil || lines_final.size != 0 %>
+            <% if lines_final!= nil %>
                 <% lines_final.each do |line| %>
                 <%= line.to_s %>
                 <% end %>

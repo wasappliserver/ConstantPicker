@@ -20,6 +20,7 @@
     margin-left: auto;
     margin-right: auto;
 }
+
 #circle {
     width: 35px;
     height: 35px;
@@ -29,3 +30,12 @@ table.dataTable tr.missing {
     background-color: #ffc4c4;
 }
 
+.radio {
+    white-space: pre;
+    margin-right: 50px;
+}
+
+.btn-modal{
+    height: 50px;
+    width: 120px;
+}

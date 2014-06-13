@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :theme_colors
+
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       resources :localizables

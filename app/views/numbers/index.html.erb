@@ -31,7 +31,12 @@
 
             <tbody role="alert" aria-live="polite" aria-relevant="all">
             <% @app.numbers.each do |number| %>
-                <tr>
+                <% if number.edit_flag== true
+                     classflag = "missing"
+                   else
+                     classflag=""
+                   end %>
+                <tr class="<%= classflag %>">
                   <td><%= number.title %></td>
                   <td><%= number.value %></td>
                   <td> <%= link_to t('.edit', :default => t("helpers.links.edit")),

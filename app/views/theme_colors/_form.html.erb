@@ -1,0 +1,46 @@
+<div class="panel-body">
+  <%= form_for @theme_color, :html => {:class => 'form-horizontal'} do |f| %>
+      <% if @theme_color.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@theme_color.errors.count, "error") %> prohibited this number from being saved:</h2>
+            <ul>
+              <% @theme_color.errors.full_messages.each do |message| %>
+                  <li>
+                    <%= message %>
+                  </li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <fieldset>
+        <legend>Enter Color Details</legend>
+        <div class="form-group">
+          <%= f.label :name, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :name, :class => 'form-control' %>
+            <div id="Inline"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :color, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :color, :class => 'form-control', :id => 'minicolor', :data_defaultValue => "#{CouleursHelper.value_coul_to_minicolor(@theme_color.color)}" %>
+            <div id="Inline"></div>
+          </div>
+        </div>
+
+        <% if (params[:app_id]!=nil)
+             app_id= params[:app_id]
+           else
+             app_id = @theme_color.app_id
+           end %>
+        <%= f.hidden_field :app_id, :value => "#{app_id}" %>
+        <div class="form-actions">
+          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                      theme_colors_path(:app_id => app_id), :class => 'btn' %>
+        </div>
+      </fieldset>
+  <% end %>
+</div>

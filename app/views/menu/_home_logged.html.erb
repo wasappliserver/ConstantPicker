@@ -22,6 +22,7 @@
                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Numbers: activate to sort column ascending" style="width: 360px;">Numbers</th>
                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Strings: activate to sort column ascending" style="width: 360px;">Strings</th>
                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 360px;">Localizable</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 360px;">Theme</th>
                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 360px;">Action</th>
               </tr>
               </thead>
@@ -33,6 +34,7 @@
                 <th rowspan="1" colspan="1">Numbers</th>
                 <th rowspan="1" colspan="1">Strings</th>
                 <th rowspan="1" colspan="1">Localizable</th>
+                <th rowspan="1" colspan="1">Theme</th>
                 <th rowspan="1" colspan="1">Action</th>
               </tr>
               </tfoot>
@@ -41,10 +43,11 @@
                   <tr>
                     <td><%= app.name %></td>
                     <td><%= link_to 'Modify Colors', couleurs_path(:app_id => app.id), :class => "btn btn-sm btn-round btn-success" %></td>
-                    <td><%= link_to 'Modify Numbers', numbers_path(:app_id => app.id), :class => "btn btn-sm btn-danger" %></td>
-                    <td><%= link_to 'Modify Strings', at_strings_path(:app_id => app.id), :class => "btn btn-sm btn-primary" %></td>
-                    <td><%= link_to 'Modify Localizable', localizables_path(:app_id => app.id), :class => "btn btn-sm btn-info" %></td>
-                    <td><%= link_to 'Launch Jenkins', start_jenkins_path(:name => app.name), :class => "btn btn-sm btn-warning" %></td>
+                    <td><%= link_to 'Modify Numbers', numbers_path(:app_id => app.id), :class => "btn btn-sm btn-round btn-danger" %></td>
+                    <td><%= link_to 'Modify Strings', at_strings_path(:app_id => app.id), :class => "btn btn-sm btn-round btn-primary" %></td>
+                    <td><%= link_to 'Modify Localizable', localizables_path(:app_id => app.id), :class => "btn btn-sm btn-round btn-info" %></td>
+                    <td><%= link_to 'Modify Color Theme', theme_colors_path(:app_id => app.id), :class => "btn btn-sm btn-round" %></td>
+                    <td><%= link_to 'Launch Jenkins', start_jenkins_path(:name => app.name), :class => "btn btn-sm btn-round btn-warning" %></td>
                   </tr>
               <% end %>
               </tbody>
